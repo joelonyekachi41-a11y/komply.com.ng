@@ -10,560 +10,168 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --green:       #1A8C4E;
-      --green-dark:  #0E5C2F;
-      --green-deep:  #083D1F;
-      --green-light: #E6F4EC;
-      --green-glow:  #2ECC71;
-      --gold:        #D4A017;
-      --gold-light:  #FDF6E3;
-      --white:       #FFFFFF;
-      --off-white:   #F8FBF9;
-      --text:        #1A1A1A;
-      --muted:       #5A6B60;
-      --border:      #C8DDD0;
+      --green:#1A8C4E; --green-dark:#0E5C2F; --green-deep:#083D1F;
+      --green-light:#E6F4EC; --green-glow:#2ECC71;
+      --gold:#D4A017; --gold-light:#FDF6E3;
+      --white:#FFFFFF; --off-white:#F8FBF9;
+      --text:#1A1A1A; --muted:#5A6B60; --border:#C8DDD0;
     }
-
     html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--off-white);
-      color: var(--text);
-      overflow-x: hidden;
-    }
-
-    /* ── NAV ─────────────────────────────────────────── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 5%;
-      height: 68px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .nav-logo {
-      display: flex; align-items: center; gap: 10px;
-      text-decoration: none;
-    }
-    .nav-logo img { height: 36px; width: auto; }
-    .nav-cta {
-      background: var(--green);
-      color: var(--white);
-      border: none; border-radius: 8px;
-      padding: 10px 22px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px; font-weight: 600;
-      cursor: pointer; text-decoration: none;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .nav-cta:hover { background: var(--green-dark); transform: translateY(-1px); }
-
-    /* ── HERO ─────────────────────────────────────────── */
-    .hero {
-      min-height: 100vh;
-      background: var(--green-deep);
-      display: flex; align-items: center;
-      padding: 100px 5% 80px;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 60% 60% at 80% 50%, rgba(26,140,78,0.25) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 40% at 10% 80%, rgba(46,204,113,0.12) 0%, transparent 60%);
-      pointer-events: none;
-    }
-    .hero-grid {
-      position: absolute; inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
-      pointer-events: none;
-    }
-    .hero-inner {
-      position: relative; z-index: 1;
-      max-width: 760px;
-    }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(26,140,78,0.3);
-      border: 1px solid rgba(46,204,113,0.4);
-      border-radius: 100px;
-      padding: 6px 16px;
-      font-size: 13px; font-weight: 500;
-      color: #7EEAA8;
-      margin-bottom: 32px;
-      animation: fadeUp 0.6s ease both;
-    }
-    .badge-dot {
-      width: 7px; height: 7px;
-      background: var(--green-glow);
-      border-radius: 50%;
-      animation: pulse 2s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.6; transform: scale(0.8); }
-    }
-    .hero h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(42px, 7vw, 76px);
-      line-height: 1.05;
-      color: var(--white);
-      margin-bottom: 28px;
-      animation: fadeUp 0.6s 0.1s ease both;
-    }
-    .hero h1 em {
-      font-style: italic;
-      color: var(--green-glow);
-    }
-    .hero p {
-      font-size: clamp(16px, 2vw, 19px);
-      color: rgba(255,255,255,0.7);
-      line-height: 1.7;
-      max-width: 580px;
-      margin-bottom: 40px;
-      font-weight: 300;
-      animation: fadeUp 0.6s 0.2s ease both;
-    }
-    .hero-actions {
-      display: flex; gap: 16px; flex-wrap: wrap;
-      animation: fadeUp 0.6s 0.3s ease both;
-    }
-    .btn-primary {
-      background: var(--green);
-      color: var(--white);
-      border: none; border-radius: 10px;
-      padding: 16px 32px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 16px; font-weight: 600;
-      cursor: pointer; text-decoration: none;
-      display: inline-flex; align-items: center; gap: 8px;
-      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-      box-shadow: 0 4px 24px rgba(26,140,78,0.4);
-    }
-    .btn-primary:hover {
-      background: var(--green-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(26,140,78,0.5);
-    }
-    .btn-ghost {
-      background: transparent;
-      color: rgba(255,255,255,0.8);
-      border: 1px solid rgba(255,255,255,0.25);
-      border-radius: 10px;
-      padding: 16px 32px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 16px; font-weight: 500;
-      cursor: pointer; text-decoration: none;
-      transition: border-color 0.2s, color 0.2s, transform 0.15s;
-    }
-    .btn-ghost:hover {
-      border-color: rgba(255,255,255,0.6);
-      color: var(--white);
-      transform: translateY(-2px);
-    }
-    .hero-stats {
-      display: flex; gap: 40px; flex-wrap: wrap;
-      margin-top: 72px; padding-top: 40px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      animation: fadeUp 0.6s 0.4s ease both;
-    }
-    .stat-item { }
-    .stat-num {
-      font-family: 'DM Serif Display', serif;
-      font-size: 32px; color: var(--green-glow);
-      line-height: 1;
-    }
-    .stat-label {
-      font-size: 13px; color: rgba(255,255,255,0.5);
-      margin-top: 4px; font-weight: 400;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ── PROBLEM STRIP ────────────────────────────────── */
-    .problem-strip {
-      background: var(--gold-light);
-      border-top: 3px solid var(--gold);
-      padding: 24px 5%;
-      display: flex; align-items: center; gap: 16px;
-      flex-wrap: wrap;
-    }
-    .problem-strip strong {
-      font-size: 15px; color: #5C3D00; font-weight: 600;
-    }
-    .problem-strip span {
-      font-size: 14px; color: #7A5200;
-    }
-    .problem-pill {
-      background: var(--gold);
-      color: var(--white);
-      border-radius: 100px;
-      padding: 4px 14px;
-      font-size: 13px; font-weight: 600;
-      white-space: nowrap;
-    }
-
-    /* ── SECTION BASE ─────────────────────────────────── */
-    section { padding: 100px 5%; }
-    .section-label {
-      font-size: 12px; font-weight: 600;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--green); margin-bottom: 16px;
-    }
-    .section-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(28px, 4vw, 44px);
-      line-height: 1.15; color: var(--text);
-      max-width: 600px; margin-bottom: 20px;
-    }
-    .section-sub {
-      font-size: 17px; color: var(--muted);
-      line-height: 1.7; max-width: 560px;
-      margin-bottom: 56px; font-weight: 300;
-    }
-
-    /* ── HOW IT WORKS ─────────────────────────────────── */
-    .how { background: var(--white); }
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 2px;
-      border: 2px solid var(--border);
-      border-radius: 16px; overflow: hidden;
-    }
-    .step {
-      background: var(--white);
-      padding: 40px 32px;
-      position: relative;
-      transition: background 0.2s;
-    }
-    .step:hover { background: var(--green-light); }
-    .step-num {
-      font-family: 'DM Serif Display', serif;
-      font-size: 48px; color: var(--border);
-      line-height: 1; margin-bottom: 20px;
-      transition: color 0.2s;
-    }
-    .step:hover .step-num { color: var(--green); }
-    .step h3 {
-      font-size: 18px; font-weight: 600;
-      color: var(--text); margin-bottom: 12px;
-    }
-    .step p { font-size: 14px; color: var(--muted); line-height: 1.6; }
-
-    /* ── FEATURES ─────────────────────────────────────── */
-    .features { background: var(--off-white); }
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-    }
-    .feature-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 36px 32px;
-      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-    }
-    .feature-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 48px rgba(14,92,47,0.1);
-      border-color: var(--green);
-    }
-    .feature-icon {
-      width: 48px; height: 48px;
-      background: var(--green-light);
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 22px; margin-bottom: 20px;
-    }
-    .feature-card h3 {
-      font-size: 17px; font-weight: 600;
-      color: var(--text); margin-bottom: 10px;
-    }
-    .feature-card p { font-size: 14px; color: var(--muted); line-height: 1.65; }
-
-    /* ── SUBDOMAIN DEMO ───────────────────────────────── */
-    .subdomain-section { background: var(--green-deep); padding: 100px 5%; }
-    .subdomain-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px; align-items: center;
-    }
-    @media (max-width: 768px) { .subdomain-inner { grid-template-columns: 1fr; gap: 48px; } }
-    .subdomain-text .section-title { color: var(--white); max-width: 480px; }
-    .subdomain-text .section-sub { color: rgba(255,255,255,0.6); }
-    .subdomain-text .section-label { color: var(--green-glow); }
-    .url-demo {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 16px;
-      overflow: hidden;
-    }
-    .url-bar {
-      background: rgba(0,0,0,0.3);
-      padding: 12px 20px;
-      display: flex; align-items: center; gap: 10px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-    .url-dots { display: flex; gap: 6px; }
-    .url-dots span {
-      width: 10px; height: 10px; border-radius: 50%;
-    }
-    .url-dots span:nth-child(1) { background: #FF5F57; }
-    .url-dots span:nth-child(2) { background: #FFBD2E; }
-    .url-dots span:nth-child(3) { background: #28C840; }
-    .url-text {
-      font-size: 13px; color: rgba(255,255,255,0.5);
-      font-family: monospace;
-    }
-    .url-text strong { color: var(--green-glow); }
-    .url-body { padding: 28px; }
-    .url-company {
-      font-family: 'DM Serif Display', serif;
-      font-size: 20px; color: var(--white);
-      margin-bottom: 4px;
-    }
-    .url-tag {
-      font-size: 12px; color: rgba(255,255,255,0.4);
-      margin-bottom: 24px;
-    }
-    .url-stats {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 12px; margin-bottom: 20px;
-    }
-    .url-stat {
-      background: rgba(255,255,255,0.06);
-      border-radius: 10px; padding: 14px 16px;
-    }
-    .url-stat-num { font-size: 20px; font-weight: 700; color: var(--green-glow); }
-    .url-stat-label { font-size: 11px; color: rgba(255,255,255,0.45); margin-top: 2px; }
-    .url-alert {
-      background: rgba(212,160,23,0.15);
-      border: 1px solid rgba(212,160,23,0.3);
-      border-radius: 10px; padding: 14px 16px;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .url-alert-icon { font-size: 16px; }
-    .url-alert-text { font-size: 13px; color: #FFD166; }
-    .url-alert-text strong { display: block; font-weight: 600; }
-
-    /* ── PRICING ──────────────────────────────────────── */
-    .pricing { background: var(--white); }
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px; align-items: start;
-    }
-    .price-card {
-      border: 1px solid var(--border);
-      border-radius: 16px; padding: 32px 28px;
-      position: relative;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .price-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.08); }
-    .price-card.featured {
-      border-color: var(--green);
-      border-width: 2px;
-      background: var(--green-deep);
-      color: var(--white);
-    }
-    .featured-badge {
-      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-      background: var(--green);
-      color: var(--white);
-      font-size: 11px; font-weight: 700;
-      padding: 4px 14px; border-radius: 100px;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      white-space: nowrap;
-    }
-    .price-tier {
-      font-size: 12px; font-weight: 600; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--green);
-      margin-bottom: 12px;
-    }
-    .price-card.featured .price-tier { color: var(--green-glow); }
-    .price-amount {
-      font-family: 'DM Serif Display', serif;
-      font-size: 36px; color: var(--text);
-      line-height: 1; margin-bottom: 4px;
-    }
-    .price-card.featured .price-amount { color: var(--white); }
-    .price-period { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
-    .price-card.featured .price-period { color: rgba(255,255,255,0.5); }
-    .price-divider {
-      height: 1px; background: var(--border);
-      margin-bottom: 24px;
-    }
-    .price-card.featured .price-divider { background: rgba(255,255,255,0.15); }
-    .price-features { list-style: none; }
-    .price-features li {
-      font-size: 14px; color: var(--muted);
-      padding: 6px 0;
-      display: flex; gap: 10px; align-items: flex-start;
-    }
-    .price-card.featured .price-features li { color: rgba(255,255,255,0.75); }
-    .price-features li::before {
-      content: '✓';
-      color: var(--green); font-weight: 700;
-      flex-shrink: 0; margin-top: 1px;
-    }
-    .price-card.featured .price-features li::before { color: var(--green-glow); }
-
-    /* ── WAITLIST ─────────────────────────────────────── */
-    .waitlist {
-      background: var(--green-deep);
-      text-align: center;
-      padding: 120px 5%;
-      position: relative; overflow: hidden;
-    }
-    .waitlist::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(26,140,78,0.3) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .waitlist-inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
-    .waitlist .section-label { color: var(--green-glow); }
-    .waitlist .section-title { color: var(--white); margin: 0 auto 16px; }
-    .waitlist .section-sub { color: rgba(255,255,255,0.6); margin: 0 auto 48px; }
-    .waitlist-form {
-      display: flex; gap: 12px; flex-wrap: wrap;
-      justify-content: center;
-    }
-    .waitlist-input {
-      flex: 1; min-width: 240px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 10px;
-      padding: 15px 20px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px; color: var(--white);
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .waitlist-input::placeholder { color: rgba(255,255,255,0.35); }
-    .waitlist-input:focus { border-color: var(--green-glow); }
-    .waitlist-note {
-      margin-top: 16px;
-      font-size: 13px; color: rgba(255,255,255,0.4);
-    }
-    .waitlist-perks {
-      display: flex; justify-content: center; gap: 32px;
-      flex-wrap: wrap; margin-top: 48px;
-    }
-    .perk {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 14px; color: rgba(255,255,255,0.6);
-    }
-    .perk-icon { color: var(--green-glow); font-size: 16px; }
-
-    /* ── FOOTER ───────────────────────────────────────── */
-    footer {
-      background: #060F09;
-      padding: 48px 5% 32px;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 24px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-    .footer-logo { display: flex; align-items: center; gap: 10px; }
-    .footer-logo img { height: 28px; }
-    .footer-text {
-      font-size: 13px; color: rgba(255,255,255,0.3);
-      line-height: 1.6;
-    }
-    .footer-links { display: flex; gap: 24px; }
-    .footer-links a {
-      font-size: 13px; color: rgba(255,255,255,0.4);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .footer-links a:hover { color: var(--green-glow); }
-
-    /* ── SCROLL REVEAL ────────────────────────────────── */
-    .reveal {
-      opacity: 0; transform: translateY(32px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    /* ── RESPONSIVE ───────────────────────────────────── */
-    @media (max-width: 600px) {
-      .hero-stats { gap: 24px; }
-      .hero-actions { flex-direction: column; }
-      .btn-primary, .btn-ghost { text-align: center; justify-content: center; }
-      section { padding: 72px 5%; }
-    }
+    body { font-family:'DM Sans',sans-serif; background:var(--off-white); color:var(--text); overflow-x:hidden; }
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(255,255,255,0.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); padding:0 5%; height:68px; display:flex; align-items:center; justify-content:space-between; }
+    .nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+    .nav-logo img { height:36px; width:auto; }
+    .nav-cta { background:var(--green); color:var(--white); border:none; border-radius:8px; padding:10px 22px; font-family:'DM Sans',sans-serif; font-size:14px; font-weight:600; cursor:pointer; text-decoration:none; transition:background 0.2s,transform 0.15s; }
+    .nav-cta:hover { background:var(--green-dark); transform:translateY(-1px); }
+    .hero { min-height:100vh; background:var(--green-deep); display:flex; align-items:center; padding:100px 5% 80px; position:relative; overflow:hidden; }
+    .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 60% at 80% 50%,rgba(26,140,78,0.25) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 10% 80%,rgba(46,204,113,0.12) 0%,transparent 60%); pointer-events:none; }
+    .hero-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px); background-size:60px 60px; pointer-events:none; }
+    .hero-inner { position:relative; z-index:1; max-width:760px; }
+    .hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(26,140,78,0.3); border:1px solid rgba(46,204,113,0.4); border-radius:100px; padding:6px 16px; font-size:13px; font-weight:500; color:#7EEAA8; margin-bottom:32px; animation:fadeUp 0.6s ease both; }
+    .badge-dot { width:7px; height:7px; background:var(--green-glow); border-radius:50%; animation:pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.6;transform:scale(0.8)} }
+    .hero h1 { font-family:'DM Serif Display',serif; font-size:clamp(42px,7vw,76px); line-height:1.05; color:var(--white); margin-bottom:28px; animation:fadeUp 0.6s 0.1s ease both; }
+    .hero h1 em { font-style:italic; color:var(--green-glow); }
+    .hero p { font-size:clamp(16px,2vw,19px); color:rgba(255,255,255,0.7); line-height:1.7; max-width:580px; margin-bottom:40px; font-weight:300; animation:fadeUp 0.6s 0.2s ease both; }
+    .hero-actions { display:flex; gap:16px; flex-wrap:wrap; animation:fadeUp 0.6s 0.3s ease both; }
+    .btn-primary { background:var(--green); color:var(--white); border:none; border-radius:10px; padding:16px 32px; font-family:'DM Sans',sans-serif; font-size:16px; font-weight:600; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:background 0.2s,transform 0.15s,box-shadow 0.2s; box-shadow:0 4px 24px rgba(26,140,78,0.4); }
+    .btn-primary:hover { background:var(--green-dark); transform:translateY(-2px); box-shadow:0 8px 32px rgba(26,140,78,0.5); }
+    .btn-ghost { background:transparent; color:rgba(255,255,255,0.8); border:1px solid rgba(255,255,255,0.25); border-radius:10px; padding:16px 32px; font-family:'DM Sans',sans-serif; font-size:16px; font-weight:500; cursor:pointer; text-decoration:none; transition:border-color 0.2s,color 0.2s,transform 0.15s; }
+    .btn-ghost:hover { border-color:rgba(255,255,255,0.6); color:var(--white); transform:translateY(-2px); }
+    .hero-stats { display:flex; gap:40px; flex-wrap:wrap; margin-top:72px; padding-top:40px; border-top:1px solid rgba(255,255,255,0.1); animation:fadeUp 0.6s 0.4s ease both; }
+    .stat-num { font-family:'DM Serif Display',serif; font-size:32px; color:var(--green-glow); line-height:1; }
+    .stat-label { font-size:13px; color:rgba(255,255,255,0.5); margin-top:4px; font-weight:400; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+    .problem-strip { background:var(--gold-light); border-top:3px solid var(--gold); padding:24px 5%; display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+    .problem-strip strong { font-size:15px; color:#5C3D00; font-weight:600; }
+    .problem-strip span { font-size:14px; color:#7A5200; }
+    .problem-pill { background:var(--gold); color:var(--white); border-radius:100px; padding:4px 14px; font-size:13px; font-weight:600; white-space:nowrap; }
+    section { padding:100px 5%; }
+    .section-label { font-size:12px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--green); margin-bottom:16px; }
+    .section-title { font-family:'DM Serif Display',serif; font-size:clamp(28px,4vw,44px); line-height:1.15; color:var(--text); max-width:600px; margin-bottom:20px; }
+    .section-sub { font-size:17px; color:var(--muted); line-height:1.7; max-width:560px; margin-bottom:56px; font-weight:300; }
+    .how { background:var(--white); }
+    .steps-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:2px; border:2px solid var(--border); border-radius:16px; overflow:hidden; }
+    .step { background:var(--white); padding:40px 32px; transition:background 0.2s; }
+    .step:hover { background:var(--green-light); }
+    .step-num { font-family:'DM Serif Display',serif; font-size:48px; color:var(--border); line-height:1; margin-bottom:20px; transition:color 0.2s; }
+    .step:hover .step-num { color:var(--green); }
+    .step h3 { font-size:18px; font-weight:600; color:var(--text); margin-bottom:12px; }
+    .step p { font-size:14px; color:var(--muted); line-height:1.6; }
+    .features { background:var(--off-white); }
+    .features-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px; }
+    .feature-card { background:var(--white); border:1px solid var(--border); border-radius:16px; padding:36px 32px; transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s; }
+    .feature-card:hover { transform:translateY(-4px); box-shadow:0 16px 48px rgba(14,92,47,0.1); border-color:var(--green); }
+    .feature-icon { width:48px; height:48px; background:var(--green-light); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:20px; }
+    .feature-card h3 { font-size:17px; font-weight:600; color:var(--text); margin-bottom:10px; }
+    .feature-card p { font-size:14px; color:var(--muted); line-height:1.65; }
+    .subdomain-section { background:var(--green-deep); padding:100px 5%; }
+    .subdomain-inner { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+    @media(max-width:768px){.subdomain-inner{grid-template-columns:1fr;gap:48px}}
+    .subdomain-text .section-title{color:var(--white);max-width:480px}
+    .subdomain-text .section-sub{color:rgba(255,255,255,0.6)}
+    .subdomain-text .section-label{color:var(--green-glow)}
+    .url-demo{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:16px;overflow:hidden}
+    .url-bar{background:rgba(0,0,0,0.3);padding:12px 20px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,0.08)}
+    .url-dots{display:flex;gap:6px}
+    .url-dots span{width:10px;height:10px;border-radius:50%}
+    .url-dots span:nth-child(1){background:#FF5F57}
+    .url-dots span:nth-child(2){background:#FFBD2E}
+    .url-dots span:nth-child(3){background:#28C840}
+    .url-text{font-size:13px;color:rgba(255,255,255,0.5);font-family:monospace}
+    .url-text strong{color:var(--green-glow)}
+    .url-body{padding:28px}
+    .url-company{font-family:'DM Serif Display',serif;font-size:20px;color:var(--white);margin-bottom:4px}
+    .url-tag{font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:24px}
+    .url-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+    .url-stat{background:rgba(255,255,255,0.06);border-radius:10px;padding:14px 16px}
+    .url-stat-num{font-size:20px;font-weight:700;color:var(--green-glow)}
+    .url-stat-label{font-size:11px;color:rgba(255,255,255,0.45);margin-top:2px}
+    .url-alert{background:rgba(212,160,23,0.15);border:1px solid rgba(212,160,23,0.3);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:10px}
+    .url-alert-icon{font-size:16px}
+    .url-alert-text{font-size:13px;color:#FFD166}
+    .url-alert-text strong{display:block;font-weight:600}
+    .pricing{background:var(--white)}
+    .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;align-items:start}
+    .price-card{border:1px solid var(--border);border-radius:16px;padding:32px 28px;position:relative;transition:transform 0.2s,box-shadow 0.2s}
+    .price-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,0.08)}
+    .price-card.featured{border-color:var(--green);border-width:2px;background:var(--green-deep);color:var(--white)}
+    .featured-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--green);color:var(--white);font-size:11px;font-weight:700;padding:4px 14px;border-radius:100px;letter-spacing:0.08em;text-transform:uppercase;white-space:nowrap}
+    .price-tier{font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);margin-bottom:12px}
+    .price-card.featured .price-tier{color:var(--green-glow)}
+    .price-amount{font-family:'DM Serif Display',serif;font-size:36px;color:var(--text);line-height:1;margin-bottom:4px}
+    .price-card.featured .price-amount{color:var(--white)}
+    .price-period{font-size:13px;color:var(--muted);margin-bottom:24px}
+    .price-card.featured .price-period{color:rgba(255,255,255,0.5)}
+    .price-divider{height:1px;background:var(--border);margin-bottom:24px}
+    .price-card.featured .price-divider{background:rgba(255,255,255,0.15)}
+    .price-features{list-style:none}
+    .price-features li{font-size:14px;color:var(--muted);padding:6px 0;display:flex;gap:10px;align-items:flex-start}
+    .price-card.featured .price-features li{color:rgba(255,255,255,0.75)}
+    .price-features li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px}
+    .price-card.featured .price-features li::before{color:var(--green-glow)}
+    .waitlist{background:var(--green-deep);text-align:center;padding:120px 5%;position:relative;overflow:hidden}
+    .waitlist::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 50% 50%,rgba(26,140,78,0.3) 0%,transparent 70%);pointer-events:none}
+    .waitlist-inner{position:relative;z-index:1;max-width:600px;margin:0 auto}
+    .waitlist .section-label{color:var(--green-glow)}
+    .waitlist .section-title{color:var(--white);margin:0 auto 16px}
+    .waitlist .section-sub{color:rgba(255,255,255,0.6);margin:0 auto 48px}
+    .waitlist-form-full{display:flex;flex-direction:column;gap:12px;max-width:480px;margin:0 auto}
+    .waitlist-form-full input{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);border-radius:10px;padding:15px 20px;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--white);outline:none;transition:border-color 0.2s;width:100%}
+    .waitlist-form-full input::placeholder{color:rgba(255,255,255,0.35)}
+    .waitlist-form-full input:focus{border-color:var(--green-glow)}
+    .waitlist-form-full button{width:100%;justify-content:center;margin-top:4px}
+    .success-message{display:none;background:rgba(46,204,113,0.15);border:1px solid rgba(46,204,113,0.4);border-radius:12px;padding:24px;text-align:center;color:#7EEAA8;font-size:16px;line-height:1.6}
+    .success-message strong{display:block;font-size:20px;margin-bottom:8px;color:var(--green-glow)}
+    .waitlist-note{margin-top:16px;font-size:13px;color:rgba(255,255,255,0.4)}
+    .waitlist-perks{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-top:48px}
+    .perk{display:flex;align-items:center;gap:8px;font-size:14px;color:rgba(255,255,255,0.6)}
+    .perk-icon{color:var(--green-glow);font-size:16px}
+    footer{background:#060F09;padding:48px 5% 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;border-top:1px solid rgba(255,255,255,0.06)}
+    .footer-logo{display:flex;align-items:center;gap:10px}
+    .footer-logo img{height:28px}
+    .footer-text{font-size:13px;color:rgba(255,255,255,0.3);line-height:1.6}
+    .footer-links{display:flex;gap:24px}
+    .footer-links a{font-size:13px;color:rgba(255,255,255,0.4);text-decoration:none;transition:color 0.2s}
+    .footer-links a:hover{color:var(--green-glow)}
+    .reveal{opacity:0;transform:translateY(32px);transition:opacity 0.7s ease,transform 0.7s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    @media(max-width:600px){.hero-stats{gap:24px}.hero-actions{flex-direction:column}.btn-primary,.btn-ghost{text-align:center;justify-content:center}section{padding:72px 5%}.waitlist-perks{gap:16px}}
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
-    <a href="#" class="nav-logo">
-      <img src="K.png" alt="Kọmply Logo" />
-    </a>
+    <a href="#" class="nav-logo"><img src="K.png" alt="Kọmply Logo" /></a>
     <a href="#waitlist" class="nav-cta">Join Waitlist →</a>
   </nav>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-grid"></div>
     <div class="hero-inner">
-      <div class="hero-badge">
-        <span class="badge-dot"></span>
-        Built for Nigerian businesses — launching 2026
-      </div>
+      <div class="hero-badge"><span class="badge-dot"></span>Built for Nigerian businesses — launching 2026</div>
       <h1>Stop Paying<br><em>Compliance Fines.</em><br>Let Kọmply Handle It.</h1>
       <p>Kọmply automates your PAYE tax, pension remittance, CAC filings and compliance deadlines — all inside your own personalised dashboard at <strong style="color:rgba(255,255,255,0.9)">yourbusiness.komply.com</strong></p>
       <div class="hero-actions">
-        <a href="#waitlist" class="btn-primary">
-          Get Early Access
-          <span>→</span>
-        </a>
+        <a href="#waitlist" class="btn-primary">Get Early Access <span>→</span></a>
         <a href="#how" class="btn-ghost">See How It Works</a>
       </div>
       <div class="hero-stats">
-        <div class="stat-item">
-          <div class="stat-num">41M+</div>
-          <div class="stat-label">Nigerian SMEs</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">96.7%</div>
-          <div class="stat-label">Currently Unserved</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">₦100K+</div>
-          <div class="stat-label">Average Fine Avoided</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">3×</div>
-          <div class="stat-label">Cheaper Than Accountant</div>
-        </div>
+        <div class="stat-item"><div class="stat-num">41M+</div><div class="stat-label">Nigerian SMEs</div></div>
+        <div class="stat-item"><div class="stat-num">96.7%</div><div class="stat-label">Currently Unserved</div></div>
+        <div class="stat-item"><div class="stat-num">₦100K+</div><div class="stat-label">Average Fine Avoided</div></div>
+        <div class="stat-item"><div class="stat-num">3×</div><div class="stat-label">Cheaper Than Accountant</div></div>
       </div>
     </div>
   </section>
 
-  <!-- PROBLEM STRIP -->
   <div class="problem-strip">
     <span class="problem-pill">⚠ 2026 NRS Act</span>
     <strong>New Nigerian tax reforms are now in effect.</strong>
     <span>Miss a filing and face ₦100,000 in your first month — then ₦50,000 every month after. Is your business compliant?</span>
   </div>
 
-  <!-- HOW IT WORKS -->
   <section class="how" id="how">
     <div class="reveal">
       <p class="section-label">How It Works</p>
@@ -571,25 +179,12 @@
       <p class="section-sub">No accountant needed. No confusing forms. Just clear, automated compliance that keeps your business protected.</p>
     </div>
     <div class="steps-grid reveal">
-      <div class="step">
-        <div class="step-num">01</div>
-        <h3>Register Your Business</h3>
-        <p>Sign up in minutes. Enter your company details and staff information. Kọmply sets up your personalised compliance dashboard at yourbusiness.komply.com.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <h3>We Calculate Everything</h3>
-        <p>Enter salaries and Kọmply instantly calculates PAYE, pension contributions (18% split), NHF, NSITF, and generates your payment schedule and payslips.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <h3>Never Miss a Deadline</h3>
-        <p>Your compliance calendar tracks every obligation. You get reminders 14 days, 7 days, and 24 hours before each deadline. Ask the AI advisor anything, anytime.</p>
-      </div>
+      <div class="step"><div class="step-num">01</div><h3>Register Your Business</h3><p>Sign up in minutes. Enter your company details and staff information. Kọmply sets up your personalised compliance dashboard at yourbusiness.komply.com.</p></div>
+      <div class="step"><div class="step-num">02</div><h3>We Calculate Everything</h3><p>Enter salaries and Kọmply instantly calculates PAYE, pension contributions (18% split), NHF, NSITF, and generates your payment schedule and payslips.</p></div>
+      <div class="step"><div class="step-num">03</div><h3>Never Miss a Deadline</h3><p>Your compliance calendar tracks every obligation. You get reminders 14 days, 7 days, and 24 hours before each deadline. Ask the AI advisor anything, anytime.</p></div>
     </div>
   </section>
 
-  <!-- FEATURES -->
   <section class="features" id="features">
     <div class="reveal">
       <p class="section-label">Features</p>
@@ -597,91 +192,46 @@
       <p class="section-sub">Built specifically for how Nigerian businesses actually operate — not adapted from foreign software.</p>
     </div>
     <div class="features-grid reveal">
-      <div class="feature-card">
-        <div class="feature-icon">🧮</div>
-        <h3>Smart Payroll Engine</h3>
-        <p>Auto-calculates PAYE, pension, NHF and NSITF for every employee. Generates payslips and remittance schedules instantly.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">📅</div>
-        <h3>Compliance Calendar</h3>
-        <p>Your personalised legal to-do list. Know exactly what to file, when to file it, and what it costs — weeks before the deadline.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🤖</div>
-        <h3>AI Compliance Advisor</h3>
-        <p>Ask any tax or HR question in plain English or Pidgin — 24 hours a day. Trained on Nigerian tax law, CAC requirements and pension rules.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🏢</div>
-        <h3>Your Own Dashboard</h3>
-        <p>Every business gets a personalised subdomain — adenikehub.komply.com. Your compliance office, branded to your company.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">📁</div>
-        <h3>Document Vault</h3>
-        <p>Store all your compliance certificates, PAYE receipts, pension schedules and CAC documents in one secure place.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">💬</div>
-        <h3>WhatsApp Reminders</h3>
-        <p>Receive compliance deadline reminders directly on WhatsApp — no need to log in to stay on top of your obligations.</p>
-      </div>
+      <div class="feature-card"><div class="feature-icon">🧮</div><h3>Smart Payroll Engine</h3><p>Auto-calculates PAYE, pension, NHF and NSITF for every employee. Generates payslips and remittance schedules instantly.</p></div>
+      <div class="feature-card"><div class="feature-icon">📅</div><h3>Compliance Calendar</h3><p>Your personalised legal to-do list. Know exactly what to file, when to file it, and what it costs — weeks before the deadline.</p></div>
+      <div class="feature-card"><div class="feature-icon">🤖</div><h3>AI Compliance Advisor</h3><p>Ask any tax or HR question in plain English or Pidgin — 24 hours a day. Trained on Nigerian tax law, CAC requirements and pension rules.</p></div>
+      <div class="feature-card"><div class="feature-icon">🏢</div><h3>Your Own Dashboard</h3><p>Every business gets a personalised subdomain — adenikehub.komply.com. Your compliance office, branded to your company.</p></div>
+      <div class="feature-card"><div class="feature-icon">📁</div><h3>Document Vault</h3><p>Store all your compliance certificates, PAYE receipts, pension schedules and CAC documents in one secure place.</p></div>
+      <div class="feature-card"><div class="feature-icon">💬</div><h3>WhatsApp Reminders</h3><p>Receive compliance deadline reminders directly on WhatsApp — no need to log in to stay on top of your obligations.</p></div>
     </div>
   </section>
 
-  <!-- SUBDOMAIN DEMO -->
   <section class="subdomain-section">
     <div class="subdomain-inner">
       <div class="subdomain-text reveal">
         <p class="section-label">Personalised Dashboard</p>
         <h2 class="section-title">Your compliance office — at your own URL</h2>
         <p class="section-sub">When you sign up, Kọmply creates a personalised dashboard at yourbusiness.komply.com. It feels like your system, not a tool you're renting.</p>
-        <a href="#waitlist" class="btn-primary" style="margin-top: 8px; display: inline-flex;">Claim Your Dashboard →</a>
+        <a href="#waitlist" class="btn-primary" style="margin-top:8px;display:inline-flex;">Claim Your Dashboard →</a>
       </div>
       <div class="url-demo reveal">
         <div class="url-bar">
-          <div class="url-dots">
-            <span></span><span></span><span></span>
-          </div>
-          <div class="url-text">
-            <strong>adenikehub</strong>.komply.com
-          </div>
+          <div class="url-dots"><span></span><span></span><span></span></div>
+          <div class="url-text"><strong>adenikehub</strong>.komply.com</div>
         </div>
         <div class="url-body">
           <div class="url-company">Adenike Hub</div>
           <div class="url-tag">RC 1234567 · Lagos, Nigeria</div>
           <div class="url-stats">
-            <div class="url-stat">
-              <div class="url-stat-num">✅ 5/5</div>
-              <div class="url-stat-label">Staff paid this month</div>
-            </div>
-            <div class="url-stat">
-              <div class="url-stat-num">100%</div>
-              <div class="url-stat-label">Compliance score</div>
-            </div>
-            <div class="url-stat">
-              <div class="url-stat-num">₦0</div>
-              <div class="url-stat-label">Fines this year</div>
-            </div>
-            <div class="url-stat">
-              <div class="url-stat-num">Apr 10</div>
-              <div class="url-stat-label">Next PAYE deadline</div>
-            </div>
+            <div class="url-stat"><div class="url-stat-num">✅ 5/5</div><div class="url-stat-label">Staff paid this month</div></div>
+            <div class="url-stat"><div class="url-stat-num">100%</div><div class="url-stat-label">Compliance score</div></div>
+            <div class="url-stat"><div class="url-stat-num">₦0</div><div class="url-stat-label">Fines this year</div></div>
+            <div class="url-stat"><div class="url-stat-num">Apr 10</div><div class="url-stat-label">Next PAYE deadline</div></div>
           </div>
           <div class="url-alert">
             <div class="url-alert-icon">⏰</div>
-            <div class="url-alert-text">
-              <strong>Reminder: Pension remittance due in 5 days</strong>
-              ₦134,000 total · 3 employees · Click to generate schedule
-            </div>
+            <div class="url-alert-text"><strong>Reminder: Pension remittance due in 5 days</strong>₦134,000 total · 3 employees · Click to generate schedule</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PRICING -->
   <section class="pricing" id="pricing">
     <div class="reveal">
       <p class="section-label">Pricing</p>
@@ -690,85 +240,73 @@
     </div>
     <div class="pricing-grid reveal">
       <div class="price-card">
-        <div class="price-tier">Starter</div>
-        <div class="price-amount">₦5,000</div>
-        <div class="price-period">per month · 1–3 staff</div>
+        <div class="price-tier">Starter</div><div class="price-amount">₦5,000</div><div class="price-period">per month · 1–3 staff</div>
         <div class="price-divider"></div>
-        <ul class="price-features">
-          <li>Compliance Calendar</li>
-          <li>AI Advisor (10 queries/month)</li>
-          <li>Deadline reminders</li>
-          <li>Personalised subdomain</li>
-        </ul>
+        <ul class="price-features"><li>Compliance Calendar</li><li>AI Advisor (10 queries/month)</li><li>Deadline reminders</li><li>Personalised subdomain</li></ul>
       </div>
       <div class="price-card featured">
         <div class="featured-badge">Most Popular</div>
-        <div class="price-tier">Growth</div>
-        <div class="price-amount">₦15,000</div>
-        <div class="price-period">per month · 4–20 staff</div>
+        <div class="price-tier">Growth</div><div class="price-amount">₦15,000</div><div class="price-period">per month · 4–20 staff</div>
         <div class="price-divider"></div>
-        <ul class="price-features">
-          <li>Full Payroll Engine</li>
-          <li>Compliance Calendar</li>
-          <li>Unlimited AI Advisor</li>
-          <li>Personalised dashboard</li>
-          <li>Payslip generation</li>
-          <li>Priority support</li>
-        </ul>
+        <ul class="price-features"><li>Full Payroll Engine</li><li>Compliance Calendar</li><li>Unlimited AI Advisor</li><li>Personalised dashboard</li><li>Payslip generation</li><li>Priority support</li></ul>
       </div>
       <div class="price-card">
-        <div class="price-tier">Business</div>
-        <div class="price-amount">₦35,000</div>
-        <div class="price-period">per month · 21–50 staff</div>
+        <div class="price-tier">Business</div><div class="price-amount">₦35,000</div><div class="price-period">per month · 21–50 staff</div>
         <div class="price-divider"></div>
-        <ul class="price-features">
-          <li>Everything in Growth</li>
-          <li>Document Vault</li>
-          <li>Multiple user logins</li>
-          <li>WhatsApp reminders</li>
-          <li>Dedicated support</li>
-        </ul>
+        <ul class="price-features"><li>Everything in Growth</li><li>Document Vault</li><li>Multiple user logins</li><li>WhatsApp reminders</li><li>Dedicated support</li></ul>
       </div>
       <div class="price-card">
-        <div class="price-tier">Enterprise</div>
-        <div class="price-amount">Custom</div>
-        <div class="price-period">50+ staff · multi-entity</div>
+        <div class="price-tier">Enterprise</div><div class="price-amount">Custom</div><div class="price-period">50+ staff · multi-entity</div>
         <div class="price-divider"></div>
-        <ul class="price-features">
-          <li>Everything in Business</li>
-          <li>Custom onboarding</li>
-          <li>Account manager</li>
-          <li>White-label option</li>
-          <li>API access</li>
-        </ul>
+        <ul class="price-features"><li>Everything in Business</li><li>Custom onboarding</li><li>Account manager</li><li>White-label option</li><li>API access</li></ul>
       </div>
     </div>
   </section>
 
-  <!-- WAITLIST -->
   <section class="waitlist" id="waitlist">
     <div class="waitlist-inner">
       <p class="section-label">Early Access</p>
       <h2 class="section-title">Be first. Get your subdomain before someone else does.</h2>
       <p class="section-sub">Join the waitlist today and get free early access, a free compliance audit of your business, and a locked-in founder's rate for life.</p>
-      <<form action="https://formspree.io/f/mwvrlpbr" 
-      method="POST" class="waitlist-form">
-  <input type="text" name="name" 
-         class="waitlist-input"
-         placeholder="Your full name" required />
-  <input type="email" name="email"
-         class="waitlist-input"
-         placeholder="Your email address" required />
-  <input type="text" name="whatsapp"
-         class="waitlist-input"
-         placeholder="WhatsApp number" required />
-  <input type="text" name="business"
-         class="waitlist-input"
-         placeholder="Business name" required />
-  <button type="submit" class="btn-primary">
-    Join Waitlist →
-  </button>
-</form>
+
+      <div class="success-message" id="successMsg">
+        <strong>You are on the list! 🎉</strong>
+        Check your email — we just sent you a confirmation. We will reach out personally within 48 hours.
+      </div>
+
+      <form action="https://api.web3forms.com/submit" method="POST" class="waitlist-form-full" id="waitlistForm">
+        <input type="hidden" name="access_key" value="83ebab66-128e-428b-8131-ef1ec2a37bd7" />
+        <input type="hidden" name="subject" value="🎉 New Kọmply Waitlist Signup!" />
+        <input type="hidden" name="from_name" value="Kọmply Waitlist" />
+        <input type="hidden" name="redirect" value="false" />
+        <input type="hidden" name="autoresponse" value="Hi there,
+
+Thank you for joining the Kọmply waitlist!
+
+You are one of the first Nigerian business owners to take compliance seriously before it costs you. That already puts you ahead.
+
+Here is what happens next:
+
+1. We will reach out to you personally within 48 hours on the WhatsApp number you provided
+2. You will get free early access before we open to the public
+3. Your subdomain — yourbusiness.komply.com — will be reserved for you
+
+While you wait: make sure your CAC annual returns are up to date. Late filing costs N5,700+ per year of delay.
+
+Any questions? Just reply to this email — I read every one personally.
+
+Talk soon,
+Joel Onyekachi
+Founder, Komply
+hello@komply.com.ng
+komply.com.ng" />
+
+        <input type="text" name="name" placeholder="Your full name" required />
+        <input type="email" name="email" placeholder="Your email address" required />
+        <input type="text" name="whatsapp" placeholder="WhatsApp number (e.g. 08012345678)" required />
+        <input type="text" name="business" placeholder="Your business name" required />
+        <button type="submit" class="btn-primary">Join Waitlist →</button>
+      </form>
 
       <p class="waitlist-note">No spam. No payment required. We'll reach out personally when we launch.</p>
       <div class="waitlist-perks">
@@ -779,13 +317,10 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-logo">
       <img src="K.png" alt="Kọmply" />
-      <div class="footer-text">
-        Making compliance effortless<br>for every Nigerian business.
-      </div>
+      <div class="footer-text">Making compliance effortless<br>for every Nigerian business.</div>
     </div>
     <div class="footer-links">
       <a href="mailto:hello@komply.com.ng">hello@komply.com.ng</a>
@@ -795,28 +330,35 @@
   </footer>
 
   <script>
-    // Scroll reveal
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1 });
     reveals.forEach(r => observer.observe(r));
 
-    // Waitlist form
-    const form = document.querySelector('.waitlist-form');
-    const input = form.querySelector('.waitlist-input');
-    const btn = form.querySelector('.btn-primary');
-    btn.addEventListener('click', (e) => {
+    const form = document.getElementById('waitlistForm');
+    const successMsg = document.getElementById('successMsg');
+
+    form.addEventListener('submit', async function(e) {
       e.preventDefault();
-      if (!input.value || !input.value.includes('@')) {
-        input.style.borderColor = '#FF5F57';
-        input.focus();
-        return;
+      const btn = form.querySelector('button[type="submit"]');
+      btn.textContent = 'Submitting...';
+      btn.disabled = true;
+      const formData = new FormData(form);
+      try {
+        const response = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData });
+        const data = await response.json();
+        if (data.success) {
+          form.style.display = 'none';
+          successMsg.style.display = 'block';
+        } else {
+          btn.textContent = 'Something went wrong. Try again.';
+          btn.disabled = false;
+        }
+      } catch (error) {
+        btn.textContent = 'Something went wrong. Try again.';
+        btn.disabled = false;
       }
-      btn.textContent = '✓ You\'re on the list!';
-      btn.style.background = '#0E5C2F';
-      input.value = '';
-      input.style.borderColor = '';
     });
   </script>
 
