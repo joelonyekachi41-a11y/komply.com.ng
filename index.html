@@ -1,357 +1,1143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kọmply — Compliance Made Simple for Nigerian Businesses</title>
-  <meta name="description" content="Kọmply automates payroll, PAYE tax, pension remittance and compliance filings for Nigerian SMEs. Stop paying fines. Start growing."/>
+  <title>Kọmply — Nigeria's #1 Compliance & Tax Platform</title>
+  <meta name="description" content="Kọmply helps Nigerian businesses and individuals automate PAYE, pension, CAC filings and personal tax returns. Nigeria's TurboTax."/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --green: #1A8C4E; --green-dark: #0E5C2F; --green-deep: #083D1F;
-      --green-light: #E6F4EC; --green-glow: #2ECC71;
-      --gold: #D4A017; --gold-light: #FDF6E3;
-      --white: #FFFFFF; --off-white: #F8FBF9;
-      --text: #1A1A1A; --muted: #5A6B60; --border: #C8DDD0;
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --green:#1A8C4E;--green-dark:#0E5C2F;--green-deep:#083D1F;
+      --green-light:#E6F4EC;--green-glow:#2ECC71;
+      --gold:#D4A017;--gold-light:#FDF6E3;
+      --white:#FFFFFF;--off:#F8FBF9;
+      --text:#1A1A1A;--muted:#5A6B60;--border:#C8DDD0;
     }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--text); overflow-x: hidden; }
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 5%; height: 68px; display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .nav-logo img { height: 36px; width: auto; }
-    .nav-cta { background: var(--green); color: var(--white); border: none; border-radius: 8px; padding: 10px 22px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; transition: background 0.2s, transform 0.15s; }
-    .nav-cta:hover { background: var(--green-dark); transform: translateY(-1px); }
-    .hero { min-height: 100vh; background: var(--green-deep); display: flex; align-items: center; padding: 100px 5% 80px; position: relative; overflow: hidden; }
-    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 60% at 80% 50%, rgba(26,140,78,0.25) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 10% 80%, rgba(46,204,113,0.12) 0%, transparent 60%); pointer-events: none; }
-    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
-    .hero-inner { position: relative; z-index: 1; max-width: 760px; }
-    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(26,140,78,0.3); border: 1px solid rgba(46,204,113,0.4); border-radius: 100px; padding: 6px 16px; font-size: 13px; font-weight: 500; color: #7EEAA8; margin-bottom: 32px; animation: fadeUp 0.6s ease both; }
-    .badge-dot { width: 7px; height: 7px; background: var(--green-glow); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.6;transform:scale(0.8)} }
-    .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(42px,7vw,76px); line-height: 1.05; color: var(--white); margin-bottom: 28px; animation: fadeUp 0.6s 0.1s ease both; }
-    .hero h1 em { font-style: italic; color: var(--green-glow); }
-    .hero p { font-size: clamp(16px,2vw,19px); color: rgba(255,255,255,0.7); line-height: 1.7; max-width: 580px; margin-bottom: 40px; font-weight: 300; animation: fadeUp 0.6s 0.2s ease both; }
-    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; animation: fadeUp 0.6s 0.3s ease both; }
-    .btn-primary { background: var(--green); color: var(--white); border: none; border-radius: 10px; padding: 16px 32px; font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; box-shadow: 0 4px 24px rgba(26,140,78,0.4); }
-    .btn-primary:hover { background: var(--green-dark); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(26,140,78,0.5); }
-    .btn-ghost { background: transparent; color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.25); border-radius: 10px; padding: 16px 32px; font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 500; cursor: pointer; text-decoration: none; transition: border-color 0.2s, color 0.2s, transform 0.15s; }
-    .btn-ghost:hover { border-color: rgba(255,255,255,0.6); color: var(--white); transform: translateY(-2px); }
-    .hero-stats { display: flex; gap: 40px; flex-wrap: wrap; margin-top: 72px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); animation: fadeUp 0.6s 0.4s ease both; }
-    .stat-num { font-family: 'DM Serif Display', serif; font-size: 32px; color: var(--green-glow); line-height: 1; }
-    .stat-label { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 4px; font-weight: 400; }
-    @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
-    .problem-strip { background: var(--gold-light); border-top: 3px solid var(--gold); padding: 24px 5%; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-    .problem-strip strong { font-size: 15px; color: #5C3D00; font-weight: 600; }
-    .problem-strip span { font-size: 14px; color: #7A5200; }
-    .problem-pill { background: var(--gold); color: var(--white); border-radius: 100px; padding: 4px 14px; font-size: 13px; font-weight: 600; white-space: nowrap; }
-    section { padding: 100px 5%; }
-    .section-label { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); margin-bottom: 16px; }
-    .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(28px,4vw,44px); line-height: 1.15; color: var(--text); max-width: 600px; margin-bottom: 20px; }
-    .section-sub { font-size: 17px; color: var(--muted); line-height: 1.7; max-width: 560px; margin-bottom: 56px; font-weight: 300; }
-    .how { background: var(--white); }
-    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 2px; border: 2px solid var(--border); border-radius: 16px; overflow: hidden; }
-    .step { background: var(--white); padding: 40px 32px; transition: background 0.2s; }
-    .step:hover { background: var(--green-light); }
-    .step-num { font-family: 'DM Serif Display', serif; font-size: 48px; color: var(--border); line-height: 1; margin-bottom: 20px; transition: color 0.2s; }
-    .step:hover .step-num { color: var(--green); }
-    .step h3 { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 12px; }
-    .step p { font-size: 14px; color: var(--muted); line-height: 1.6; }
-    .features { background: var(--off-white); }
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 24px; }
-    .feature-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 36px 32px; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
-    .feature-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(14,92,47,0.1); border-color: var(--green); }
-    .feature-icon { width: 48px; height: 48px; background: var(--green-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 20px; }
-    .feature-card h3 { font-size: 17px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
-    .feature-card p { font-size: 14px; color: var(--muted); line-height: 1.65; }
-    .subdomain-section { background: var(--green-deep); padding: 100px 5%; }
-    .subdomain-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    @media(max-width:768px){ .subdomain-inner { grid-template-columns: 1fr; gap: 48px; } }
-    .subdomain-text .section-title { color: var(--white); max-width: 480px; }
-    .subdomain-text .section-sub { color: rgba(255,255,255,0.6); }
-    .subdomain-text .section-label { color: var(--green-glow); }
-    .url-demo { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; overflow: hidden; }
-    .url-bar { background: rgba(0,0,0,0.3); padding: 12px 20px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.08); }
-    .url-dots { display: flex; gap: 6px; }
-    .url-dots span { width: 10px; height: 10px; border-radius: 50%; }
-    .url-dots span:nth-child(1){ background: #FF5F57; }
-    .url-dots span:nth-child(2){ background: #FFBD2E; }
-    .url-dots span:nth-child(3){ background: #28C840; }
-    .url-text { font-size: 13px; color: rgba(255,255,255,0.5); font-family: monospace; }
-    .url-text strong { color: var(--green-glow); }
-    .url-body { padding: 28px; }
-    .url-company { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--white); margin-bottom: 4px; }
-    .url-tag { font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 24px; }
-    .url-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
-    .url-stat { background: rgba(255,255,255,0.06); border-radius: 10px; padding: 14px 16px; }
-    .url-stat-num { font-size: 20px; font-weight: 700; color: var(--green-glow); }
-    .url-stat-label { font-size: 11px; color: rgba(255,255,255,0.45); margin-top: 2px; }
-    .url-alert { background: rgba(212,160,23,0.15); border: 1px solid rgba(212,160,23,0.3); border-radius: 10px; padding: 14px 16px; display: flex; align-items: center; gap: 10px; }
-    .url-alert-icon { font-size: 16px; }
-    .url-alert-text { font-size: 13px; color: #FFD166; }
-    .url-alert-text strong { display: block; font-weight: 600; }
-    .pricing { background: var(--white); }
-    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 20px; align-items: start; }
-    .price-card { border: 1px solid var(--border); border-radius: 16px; padding: 32px 28px; position: relative; transition: transform 0.2s, box-shadow 0.2s; }
-    .price-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.08); }
-    .price-card.featured { border-color: var(--green); border-width: 2px; background: var(--green-deep); color: var(--white); }
-    .featured-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--green); color: var(--white); font-size: 11px; font-weight: 700; padding: 4px 14px; border-radius: 100px; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; }
-    .price-tier { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-bottom: 12px; }
-    .price-card.featured .price-tier { color: var(--green-glow); }
-    .price-amount { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--text); line-height: 1; margin-bottom: 4px; }
-    .price-card.featured .price-amount { color: var(--white); }
-    .price-period { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
-    .price-card.featured .price-period { color: rgba(255,255,255,0.5); }
-    .price-divider { height: 1px; background: var(--border); margin-bottom: 24px; }
-    .price-card.featured .price-divider { background: rgba(255,255,255,0.15); }
-    .price-features { list-style: none; }
-    .price-features li { font-size: 14px; color: var(--muted); padding: 6px 0; display: flex; gap: 10px; align-items: flex-start; }
-    .price-card.featured .price-features li { color: rgba(255,255,255,0.75); }
-    .price-features li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
-    .price-card.featured .price-features li::before { color: var(--green-glow); }
-    .waitlist { background: var(--green-deep); text-align: center; padding: 120px 5%; position: relative; overflow: hidden; }
-    .waitlist::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(26,140,78,0.3) 0%, transparent 70%); pointer-events: none; }
-    .waitlist-inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
-    .waitlist .section-label { color: var(--green-glow); }
-    .waitlist .section-title { color: var(--white); margin: 0 auto 16px; }
-    .waitlist .section-sub { color: rgba(255,255,255,0.6); margin: 0 auto 48px; }
-    .waitlist-form { display: flex; flex-direction: column; gap: 12px; max-width: 480px; margin: 0 auto; }
-    .waitlist-form input { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 15px 20px; font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--white); outline: none; width: 100%; transition: border-color 0.2s; -webkit-appearance: none; }
-    .waitlist-form input::placeholder { color: rgba(255,255,255,0.4); }
-    .waitlist-form input:focus { border-color: var(--green-glow); }
-    .waitlist-form button { width: 100%; justify-content: center; margin-top: 4px; }
-    .waitlist-note { margin-top: 16px; font-size: 13px; color: rgba(255,255,255,0.4); }
-    .waitlist-perks { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin-top: 48px; }
-    .perk { display: flex; align-items: center; gap: 8px; font-size: 14px; color: rgba(255,255,255,0.6); }
-    .perk-icon { color: var(--green-glow); font-size: 16px; }
-    .success-box { display: none; background: rgba(46,204,113,0.15); border: 1px solid rgba(46,204,113,0.4); border-radius: 16px; padding: 32px 24px; }
-    .success-box h3 { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--green-glow); margin-bottom: 12px; }
-    .success-box p { font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.6; }
-    footer { background: #060F09; padding: 48px 5% 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; border-top: 1px solid rgba(255,255,255,0.06); }
-    .footer-logo { display: flex; align-items: center; gap: 10px; }
-    .footer-logo img { height: 28px; }
-    .footer-text { font-size: 13px; color: rgba(255,255,255,0.3); line-height: 1.6; }
-    .footer-links { display: flex; gap: 24px; }
-    .footer-links a { font-size: 13px; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--green-glow); }
-    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    @media(max-width:600px) { .hero-stats{gap:24px} .hero-actions{flex-direction:column} .btn-primary,.btn-ghost{text-align:center;justify-content:center} section{padding:72px 5%} .waitlist-perks{gap:16px} }
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--text);overflow-x:hidden}
+
+    /* ── NAV ── */
+    nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,0.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 5%;height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+    .nav-logo-box{width:36px;height:36px;background:var(--green-deep);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:20px;color:#fff}
+    .nav-logo-name{font-family:'DM Serif Display',serif;font-size:22px;color:var(--green-deep)}
+    .nav-links{display:flex;align-items:center;gap:28px}
+    .nav-links a{text-decoration:none;font-size:14px;color:var(--muted);font-weight:500;transition:color .2s}
+    .nav-links a:hover{color:var(--green-dark)}
+    .nav-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
+    .nav-login{font-size:13px;color:var(--muted);font-weight:500;padding:8px 16px;border:1.5px solid var(--border);border-radius:8px;text-decoration:none;transition:all .2s;position:relative}
+    .nav-login:hover{border-color:var(--green);color:var(--green-dark)}
+    .nav-login .soon{position:absolute;top:-8px;right:-4px;background:var(--gold);color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:100px;white-space:nowrap}
+    .nav-cta{background:var(--green);color:#fff;border:none;border-radius:8px;padding:10px 20px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:background .2s,transform .15s}
+    .nav-cta:hover{background:var(--green-dark);transform:translateY(-1px)}
+
+    /* ── HERO ── */
+    .hero{min-height:100vh;background:var(--green-deep);display:flex;align-items:center;padding:100px 5% 80px;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 65% 65% at 85% 40%,rgba(26,140,78,.35) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 5% 80%,rgba(46,204,113,.12) 0%,transparent 60%);pointer-events:none}
+    .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+    .hero-inner{position:relative;z-index:1;max-width:860px}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(26,140,78,.3);border:1px solid rgba(46,204,113,.4);border-radius:100px;padding:6px 16px;font-size:13px;font-weight:500;color:#7EEAA8;margin-bottom:32px;animation:fadeUp .6s ease both}
+    .badge-dot{width:7px;height:7px;background:var(--green-glow);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.8)}}
+    .hero h1{font-family:'DM Serif Display',serif;font-size:clamp(40px,6.5vw,72px);line-height:1.05;color:#fff;margin-bottom:24px;animation:fadeUp .6s .1s ease both}
+    .hero h1 em{font-style:italic;color:var(--green-glow)}
+    .hero-desc{font-size:clamp(15px,1.8vw,18px);color:rgba(255,255,255,.7);line-height:1.8;max-width:620px;margin-bottom:14px;font-weight:300;animation:fadeUp .6s .2s ease both}
+    .hero-note{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:40px;animation:fadeUp .6s .25s ease both}
+    .hero-actions{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp .6s .3s ease both}
+    .btn-primary{background:var(--green);color:#fff;border:none;border-radius:10px;padding:15px 30px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:background .2s,transform .15s,box-shadow .2s;box-shadow:0 4px 24px rgba(26,140,78,.4)}
+    .btn-primary:hover{background:var(--green-dark);transform:translateY(-2px);box-shadow:0 8px 32px rgba(26,140,78,.5)}
+    .btn-ghost{background:transparent;color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:15px 30px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:border-color .2s,color .2s,transform .15s}
+    .btn-ghost:hover{border-color:rgba(255,255,255,.6);color:#fff;transform:translateY(-2px)}
+    .hero-stats{display:flex;gap:40px;flex-wrap:wrap;margin-top:64px;padding-top:40px;border-top:1px solid rgba(255,255,255,.1);animation:fadeUp .6s .4s ease both}
+    .stat-num{font-family:'DM Serif Display',serif;font-size:30px;color:var(--green-glow);line-height:1}
+    .stat-label{font-size:12px;color:rgba(255,255,255,.5);margin-top:4px}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+    /* ── ALERT ── */
+    .alert-strip{background:var(--gold-light);border-top:3px solid var(--gold);padding:14px 5%;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+    .alert-pill{background:var(--gold);color:#fff;border-radius:100px;padding:4px 14px;font-size:12px;font-weight:700;white-space:nowrap;display:flex;align-items:center;gap:6px}
+    .alert-strip strong{font-size:14px;color:#5C3D00;font-weight:700}
+    .alert-strip span{font-size:13px;color:#7A5200}
+
+    /* ── SHARED ── */
+    .sec{padding:90px 5%}
+    .sec-white{background:#fff}
+    .sec-off{background:var(--off)}
+    .sec-dark{background:var(--green-deep)}
+    .sec-label{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--green);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+    .sec-label svg{width:14px;height:14px;flex-shrink:0}
+    .sec-title{font-family:'DM Serif Display',serif;font-size:clamp(28px,3.5vw,44px);color:var(--green-deep);line-height:1.15;margin-bottom:14px}
+    .sec-sub{font-size:16px;color:var(--muted);line-height:1.75;max-width:600px;margin-bottom:52px;font-weight:300}
+    .center{text-align:center}
+    .center .sec-sub{margin-left:auto;margin-right:auto}
+
+    /* ── ICON SYSTEM ── */
+    .icon{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+    .icon-box{width:48px;height:48px;border-radius:12px;background:var(--green-light);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+    .icon-box svg{width:24px;height:24px;color:var(--green)}
+    .icon-box.dark{background:rgba(46,204,113,.15)}
+    .icon-box.dark svg{color:var(--green-glow)}
+    .icon-box.gold{background:var(--gold-light)}
+    .icon-box.gold svg{color:var(--gold)}
+
+    /* ── WHO WE SERVE ── */
+    .serve-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    .serve-card{border-radius:20px;padding:40px 36px;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
+    .serve-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.12)}
+    .serve-card.biz{background:var(--green-deep)}
+    .serve-card.ind{background:var(--off);border:1.5px solid var(--border)}
+    .serve-card::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;pointer-events:none}
+    .biz::before{background:radial-gradient(circle,rgba(26,140,78,.4) 0%,transparent 70%)}
+    .ind::before{background:radial-gradient(circle,rgba(26,140,78,.07) 0%,transparent 70%)}
+    .serve-tag{display:inline-flex;align-items:center;gap:6px;border-radius:100px;padding:5px 14px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px}
+    .serve-tag svg{width:12px;height:12px}
+    .biz .serve-tag{background:rgba(46,204,113,.2);color:var(--green-glow)}
+    .ind .serve-tag{background:var(--green-light);color:var(--green-dark)}
+    .serve-card h3{font-family:'DM Serif Display',serif;font-size:26px;line-height:1.2;margin-bottom:14px}
+    .biz h3{color:#fff}
+    .ind h3{color:var(--green-deep)}
+    .serve-card>p{font-size:14px;line-height:1.75;margin-bottom:24px;font-weight:300}
+    .biz>p{color:rgba(255,255,255,.65)}
+    .ind>p{color:var(--muted)}
+    .serve-list{list-style:none;margin-bottom:28px;display:flex;flex-direction:column;gap:10px}
+    .serve-list li{display:flex;align-items:flex-start;gap:10px;font-size:13px;font-weight:500;line-height:1.4}
+    .biz .serve-list li{color:rgba(255,255,255,.85)}
+    .ind .serve-list li{color:var(--green-dark)}
+    .check-icon{width:18px;height:18px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+    .check-icon svg{width:10px;height:10px;color:#fff}
+    .serve-price{font-size:13px;font-weight:600}
+    .biz .serve-price{color:var(--green-glow)}
+    .ind .serve-price{color:var(--green)}
+
+    /* ── CALCULATOR ── */
+    .calc-tabs{display:flex;gap:12px;margin-bottom:40px;flex-wrap:wrap}
+    .ctab{padding:10px 24px;border-radius:100px;font-size:14px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:#fff;color:var(--muted);transition:all .2s;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:8px}
+    .ctab svg{width:16px;height:16px}
+    .ctab.active{background:var(--green-deep);border-color:var(--green-deep);color:#fff}
+    .calc-panel{display:none}
+    .calc-panel.active{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+    .calc-form{background:#fff;border:1.5px solid var(--border);border-radius:20px;padding:32px}
+    .calc-form h3{font-family:'DM Serif Display',serif;font-size:22px;color:var(--green-deep);margin-bottom:6px}
+    .calc-form>p{font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.5}
+    .form-group{margin-bottom:16px}
+    .form-group label{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--green-dark);margin-bottom:6px;letter-spacing:.04em;text-transform:uppercase}
+    .form-group label svg{width:13px;height:13px;color:var(--green)}
+    .form-group input,.form-group select{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--off);outline:none;transition:border-color .2s}
+    .form-group input:focus,.form-group select:focus{border-color:var(--green);background:#fff}
+    .calc-btn{width:100%;background:var(--green);color:#fff;border:none;border-radius:10px;padding:14px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:background .2s;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:8px}
+    .calc-btn svg{width:18px;height:18px}
+    .calc-btn:hover{background:var(--green-dark)}
+    .calc-results{background:var(--green-deep);border-radius:20px;padding:32px}
+    .calc-results h3{font-family:'DM Serif Display',serif;font-size:20px;color:#fff;margin-bottom:24px;display:flex;align-items:center;gap:10px}
+    .calc-results h3 svg{width:20px;height:20px;color:var(--green-glow)}
+    .result-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:14px}
+    .result-row:last-of-type{border-bottom:none}
+    .result-label{color:rgba(255,255,255,.6);display:flex;align-items:center;gap:8px;font-size:13px}
+    .result-label svg{width:14px;height:14px;opacity:.7}
+    .result-val{font-weight:700;color:#fff;font-family:'DM Serif Display',serif;font-size:16px}
+    .result-val.pos{color:var(--green-glow)}
+    .result-val.neg{color:#FF8A80}
+    .result-total{background:rgba(46,204,113,.15);border:1px solid rgba(46,204,113,.3);border-radius:12px;padding:16px;margin-top:16px;display:flex;justify-content:space-between;align-items:center}
+    .result-total .lbl{color:rgba(255,255,255,.8);font-weight:600;font-size:14px}
+    .result-total .amt{font-family:'DM Serif Display',serif;font-size:28px;color:var(--green-glow)}
+    .calc-note{font-size:11px;color:rgba(255,255,255,.35);margin-top:14px;line-height:1.5}
+    .result-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;height:260px;gap:12px;opacity:.4}
+    .result-placeholder svg{width:48px;height:48px;color:rgba(255,255,255,.4)}
+    .result-placeholder p{font-size:13px;color:rgba(255,255,255,.5);text-align:center;line-height:1.5}
+
+    /* ── FEATURES ── */
+    .feat-tabs{display:flex;gap:12px;margin-bottom:40px;flex-wrap:wrap}
+    .ftab{padding:10px 24px;border-radius:100px;font-size:14px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:#fff;color:var(--muted);transition:all .2s;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:8px}
+    .ftab svg{width:16px;height:16px}
+    .ftab.active{background:var(--green-deep);border-color:var(--green-deep);color:#fff}
+    .feat-panel{display:none}
+    .feat-panel.active{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .feat-card{border:1.5px solid var(--border);border-radius:16px;padding:28px 24px;background:var(--off);transition:border-color .2s,transform .2s,box-shadow .2s}
+    .feat-card:hover{border-color:var(--green);transform:translateY(-3px);box-shadow:0 10px 32px rgba(14,92,47,.1)}
+    .feat-card h4{font-size:15px;font-weight:700;color:var(--green-deep);margin-bottom:8px}
+    .feat-card p{font-size:13px;color:var(--muted);line-height:1.6}
+    .feat-badge{display:inline-flex;align-items:center;gap:5px;margin-top:14px;font-size:10px;font-weight:700;border-radius:100px;padding:3px 10px;letter-spacing:.06em;text-transform:uppercase}
+    .feat-badge svg{width:10px;height:10px}
+    .feat-badge.green{color:var(--green);background:var(--green-light)}
+    .feat-badge.gold{color:#7A5200;background:var(--gold-light)}
+    .feat-badge.both{color:#fff;background:var(--green)}
+    .lock-badge{display:inline-flex;align-items:center;gap:5px;margin-top:8px;font-size:10px;font-weight:700;color:var(--muted);background:#f0f0f0;border-radius:100px;padding:3px 10px}
+    .lock-badge svg{width:10px;height:10px}
+
+    /* ── ADA ── */
+    .ada-section{position:relative}
+    .ada-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 80% at 70% 50%,rgba(26,140,78,.3) 0%,transparent 65%);pointer-events:none}
+    .ada-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;position:relative;z-index:1}
+    .ada-left .sec-label{color:var(--green-glow)}
+    .ada-left .sec-label svg{color:var(--green-glow)}
+    .ada-left .sec-title{color:#fff}
+    .ada-left .sec-sub{color:rgba(255,255,255,.6);margin-bottom:28px}
+    .ada-features{list-style:none;display:flex;flex-direction:column;gap:14px}
+    .ada-features li{display:flex;align-items:flex-start;gap:12px;font-size:14px;color:rgba(255,255,255,.75);line-height:1.5}
+    .ada-feat-icon{width:32px;height:32px;border-radius:8px;background:rgba(46,204,113,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .ada-feat-icon svg{width:16px;height:16px;color:var(--green-glow)}
+    .ada-chat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:24px}
+    .chat-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.1)}
+    .chat-avatar{width:40px;height:40px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center}
+    .chat-avatar svg{width:20px;height:20px;color:#fff}
+    .chat-name{font-weight:700;color:#fff;font-size:14px}
+    .chat-status{font-size:11px;color:var(--green-glow);display:flex;align-items:center;gap:4px}
+    .status-dot{width:6px;height:6px;background:var(--green-glow);border-radius:50%}
+    .chat-messages{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
+    .msg{max-width:88%;padding:11px 15px;border-radius:14px;font-size:13px;line-height:1.5}
+    .msg.user{background:var(--green);color:#fff;align-self:flex-end;border-bottom-right-radius:3px}
+    .msg.ada{background:rgba(255,255,255,.1);color:rgba(255,255,255,.85);align-self:flex-start;border-bottom-left-radius:3px}
+    .chat-input{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:11px 14px;display:flex;align-items:center;justify-content:space-between}
+    .chat-input span{font-size:12px;color:rgba(255,255,255,.3)}
+    .chat-send{background:var(--green);border:none;border-radius:7px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+    .chat-send svg{width:14px;height:14px;color:#fff}
+
+    /* ── HOW IT WORKS ── */
+    .how-tabs{display:flex;gap:12px;margin-bottom:40px;flex-wrap:wrap}
+    .htab{padding:10px 24px;border-radius:100px;font-size:14px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:#fff;color:var(--muted);transition:all .2s;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:8px}
+    .htab svg{width:16px;height:16px}
+    .htab.active{background:var(--green-deep);border-color:var(--green-deep);color:#fff}
+    .how-panel{display:none}
+    .how-panel.active{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .step-card{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:28px 24px;transition:border-color .2s,transform .2s}
+    .step-card:hover{border-color:var(--green);transform:translateY(-3px)}
+    .step-num{font-family:'DM Serif Display',serif;font-size:44px;color:var(--green-light);line-height:1;margin-bottom:14px}
+    .step-card h4{font-size:15px;font-weight:700;color:var(--green-deep);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+    .step-card h4 svg{width:18px;height:18px;color:var(--green)}
+    .step-card p{font-size:13px;color:var(--muted);line-height:1.6}
+
+    /* ── PRICING ── */
+    .pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .price-card{background:#fff;border:1.5px solid var(--border);border-radius:20px;padding:28px 24px;position:relative;transition:transform .2s,box-shadow .2s}
+    .price-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.09)}
+    .price-card.featured{background:var(--green-deep);border-color:var(--green-deep)}
+    .pop-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--gold);color:#fff;font-size:10px;font-weight:700;padding:3px 14px;border-radius:100px;white-space:nowrap;text-transform:uppercase;letter-spacing:.06em}
+    .price-tier{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+    .price-card:not(.featured) .price-tier{color:var(--green)}
+    .featured .price-tier{color:var(--green-glow)}
+    .price-name{font-family:'DM Serif Display',serif;font-size:20px;margin-bottom:18px}
+    .price-card:not(.featured) .price-name{color:var(--green-deep)}
+    .featured .price-name{color:#fff}
+    .price-amount{font-family:'DM Serif Display',serif;font-size:32px;line-height:1;margin-bottom:4px}
+    .price-card:not(.featured) .price-amount{color:var(--green-deep)}
+    .featured .price-amount{color:#fff}
+    .price-period{font-size:12px;margin-bottom:20px}
+    .price-card:not(.featured) .price-period{color:var(--muted)}
+    .featured .price-period{color:rgba(255,255,255,.5)}
+    .price-div{height:1px;margin-bottom:18px}
+    .price-card:not(.featured) .price-div{background:var(--border)}
+    .featured .price-div{background:rgba(255,255,255,.1)}
+    .price-feats{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:24px}
+    .price-feats li{font-size:12px;display:flex;align-items:center;gap:7px}
+    .price-card:not(.featured) .price-feats li{color:var(--muted)}
+    .featured .price-feats li{color:rgba(255,255,255,.7)}
+    .price-feats li.locked{opacity:.45}
+    .price-feats li svg{width:13px;height:13px;flex-shrink:0}
+    .price-feats li.included svg{color:var(--green-glow)}
+    .price-feats li.locked svg{color:#aaa}
+    .price-btn{display:flex;width:100%;padding:11px;border-radius:9px;font-size:13px;font-weight:700;align-items:center;justify-content:center;gap:6px;cursor:pointer;text-decoration:none;border:none;font-family:'DM Sans',sans-serif;transition:all .2s}
+    .price-btn svg{width:14px;height:14px}
+    .price-card:not(.featured) .price-btn{background:var(--green-light);color:var(--green-dark)}
+    .price-card:not(.featured) .price-btn:hover{background:var(--green);color:#fff}
+    .featured .price-btn{background:var(--green);color:#fff}
+    .featured .price-btn:hover{background:var(--green-glow);color:var(--green-deep)}
+    .ind-pricing{margin-top:20px;background:var(--gold-light);border:1.5px solid #e8d08a;border-radius:20px;padding:32px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+    .ind-pricing h3{font-family:'DM Serif Display',serif;font-size:22px;color:var(--green-deep);margin-bottom:8px}
+    .ind-pricing p{font-size:14px;color:var(--muted);max-width:460px;line-height:1.6}
+    .ind-right{text-align:right;flex-shrink:0}
+    .ind-amount{font-family:'DM Serif Display',serif;font-size:32px;color:var(--green-deep);line-height:1}
+    .ind-mo{font-size:12px;color:var(--muted);margin-bottom:6px}
+
+    /* ── FAQ ── */
+    .faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+    .faq-item{background:#fff;border:1.5px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .2s}
+    .faq-item.open{border-color:var(--green)}
+    .faq-q{padding:20px 24px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;gap:16px}
+    .faq-q-left{display:flex;align-items:center;gap:12px}
+    .faq-q-icon{width:32px;height:32px;border-radius:8px;background:var(--green-light);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .faq-q-icon svg{width:16px;height:16px;color:var(--green)}
+    .faq-item.open .faq-q-icon{background:var(--green)}
+    .faq-item.open .faq-q-icon svg{color:#fff}
+    .faq-q span{font-size:15px;font-weight:600;color:var(--green-deep)}
+    .faq-arrow{width:20px;height:20px;color:var(--green);transition:transform .2s;flex-shrink:0}
+    .faq-item.open .faq-arrow{transform:rotate(45deg)}
+    .faq-a{display:none;padding:0 24px 20px 68px;font-size:14px;color:var(--muted);line-height:1.7}
+    .faq-item.open .faq-a{display:block}
+
+    /* ── WAITLIST ── */
+    .wl-inner{max-width:660px;margin:0 auto}
+    .wl-form{display:flex;flex-direction:column;gap:14px;text-align:left}
+    .wl-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .wl-input{width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--off);transition:border-color .2s;outline:none}
+    .wl-input:focus{border-color:var(--green);background:#fff}
+    .wl-submit{background:var(--green);color:#fff;border:none;border-radius:10px;padding:15px;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:background .2s,transform .15s;display:flex;align-items:center;justify-content:center;gap:8px}
+    .wl-submit svg{width:18px;height:18px}
+    .wl-submit:hover{background:var(--green-dark);transform:translateY(-1px)}
+    .wl-note{text-align:center;font-size:13px;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:6px}
+    .wl-note svg{width:14px;height:14px;color:var(--green)}
+    .success-msg{display:none;background:var(--green-light);border:1.5px solid var(--green);border-radius:12px;padding:24px;text-align:center}
+    .success-msg h4{font-size:18px;font-weight:700;color:var(--green-dark);margin-bottom:8px}
+    .success-msg p{font-size:14px;color:var(--muted)}
+
+    /* ── FOOTER ── */
+    footer{background:var(--green-deep);padding:64px 5% 0}
+    .footer-inner{max-width:1200px;margin:0 auto}
+    .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1.4fr;gap:40px;margin-bottom:48px}
+    .footer-logo{display:flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:14px}
+    .footer-logo-box{width:36px;height:36px;background:var(--green);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:20px;color:#fff}
+    .footer-logo-name{font-family:'DM Serif Display',serif;font-size:22px;color:#fff}
+    .footer-brand p{font-size:13px;color:rgba(255,255,255,.5);line-height:1.7;max-width:260px;font-weight:300;margin-bottom:20px}
+    .footer-col h5{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:18px}
+    .footer-col a{display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(255,255,255,.6);text-decoration:none;margin-bottom:10px;transition:color .2s}
+    .footer-col a:hover{color:var(--green-glow)}
+    .footer-col a svg{width:13px;height:13px;opacity:.5}
+    .footer-subscribe h5{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:18px}
+    .footer-subscribe p{font-size:13px;color:rgba(255,255,255,.5);line-height:1.6;margin-bottom:16px}
+    .sub-form{display:flex;flex-direction:column;gap:10px}
+    .sub-input{padding:11px 14px;border:1px solid rgba(255,255,255,.15);border-radius:8px;background:rgba(255,255,255,.06);font-family:'DM Sans',sans-serif;font-size:13px;color:#fff;outline:none;transition:border-color .2s}
+    .sub-input::placeholder{color:rgba(255,255,255,.3)}
+    .sub-input:focus{border-color:var(--green-glow)}
+    .sub-btn{background:var(--green);color:#fff;border:none;border-radius:8px;padding:11px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:6px}
+    .sub-btn svg{width:14px;height:14px}
+    .sub-btn:hover{background:var(--green-dark)}
+    .footer-social{display:flex;gap:10px;margin-top:16px}
+    .social-btn{width:36px;height:36px;border:1px solid rgba(255,255,255,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:border-color .2s,background .2s}
+    .social-btn:hover{border-color:var(--green-glow);background:rgba(46,204,113,.1)}
+    .social-btn svg{width:16px;height:16px;color:rgba(255,255,255,.6)}
+    .footer-divider{border:none;border-top:1px solid rgba(255,255,255,.08);margin-bottom:24px}
+    .footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-bottom:32px}
+    .footer-bottom p{font-size:12px;color:rgba(255,255,255,.25)}
+    .footer-bottom-links{display:flex;gap:20px}
+    .footer-bottom-links a{font-size:12px;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s}
+    .footer-bottom-links a:hover{color:var(--green-glow)}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:1024px){.footer-top{grid-template-columns:1fr 1fr 1fr}.footer-subscribe{grid-column:1/-1}}
+    @media(max-width:900px){.nav-links{display:none}.serve-grid,.ada-inner,.calc-panel.active,.how-panel.active{grid-template-columns:1fr}.feat-panel.active,.pricing-grid{grid-template-columns:1fr 1fr}.footer-top{grid-template-columns:1fr 1fr}}
+    @media(max-width:560px){.feat-panel.active,.pricing-grid,.wl-row{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
 
-  <nav>
-    <a href="#" class="nav-logo"><img src="K.png" alt="Komply Logo" /></a>
-    <a href="#waitlist" class="nav-cta">Join Waitlist →</a>
-  </nav>
+<!-- SVG SPRITE (hidden) -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="ico-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol>
+  <symbol id="ico-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+  <symbol id="ico-calculator" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="10" y2="18"/><line x1="14" y1="18" x2="16" y2="18"/></symbol>
+  <symbol id="ico-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+  <symbol id="ico-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="ico-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="ico-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></symbol>
+  <symbol id="ico-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+  <symbol id="ico-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
+  <symbol id="ico-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></symbol>
+  <symbol id="ico-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></symbol>
+  <symbol id="ico-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M12 11V5"/><circle cx="12" cy="3" r="2"/><line x1="8" y1="15" x2="8" y2="17"/><line x1="16" y1="15" x2="16" y2="17"/></symbol>
+  <symbol id="ico-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></symbol>
+  <symbol id="ico-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></symbol>
+  <symbol id="ico-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
+  <symbol id="ico-twitter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></symbol>
+  <symbol id="ico-linkedin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></symbol>
+  <symbol id="ico-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></symbol>
+  <symbol id="ico-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+  <symbol id="ico-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
+  <symbol id="ico-warning" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+  <symbol id="ico-money" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></symbol>
+  <symbol id="ico-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></symbol>
+  <symbol id="ico-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></symbol>
+  <symbol id="ico-briefcase" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></symbol>
+  <symbol id="ico-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></symbol>
+  <symbol id="ico-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+  <symbol id="ico-brain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 007 4.5v15A2.5 2.5 0 009.5 22h5a2.5 2.5 0 002.5-2.5v-15A2.5 2.5 0 0014.5 2h-5z"/><path d="M7 8H4a2 2 0 00-2 2v4a2 2 0 002 2h3"/><path d="M17 8h3a2 2 0 012 2v4a2 2 0 01-2 2h-3"/></symbol>
+  <symbol id="ico-message" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></symbol>
+  <symbol id="ico-trending" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></symbol>
+  <symbol id="ico-question" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+  <symbol id="ico-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></symbol>
+  <symbol id="ico-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></symbol>
+</svg>
 
-  <section class="hero">
-    <div class="hero-grid"></div>
-    <div class="hero-inner">
-      <div class="hero-badge"><span class="badge-dot"></span> Built for Nigerian businesses — launching 2026</div>
-      <h1>Stop Paying<br><em>Compliance Fines.</em><br>Let Komply Handle It.</h1>
-      <p>Komply automates your PAYE tax, pension remittance, CAC filings and compliance deadlines — all inside your own personalised dashboard at <strong style="color:rgba(255,255,255,0.9)">yourbusiness.komply.com</strong></p>
-      <div class="hero-actions">
-        <a href="#waitlist" class="btn-primary">Get Early Access <span>→</span></a>
-        <a href="#how" class="btn-ghost">See How It Works</a>
-      </div>
-      <div class="hero-stats">
-        <div><div class="stat-num">41M+</div><div class="stat-label">Nigerian SMEs</div></div>
-        <div><div class="stat-num">96.7%</div><div class="stat-label">Currently Unserved</div></div>
-        <div><div class="stat-num">₦100K+</div><div class="stat-label">Average Fine Avoided</div></div>
-        <div><div class="stat-num">3×</div><div class="stat-label">Cheaper Than Accountant</div></div>
-      </div>
+<!-- ══ NAV ══ -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-box">K</div>
+    <span class="nav-logo-name">Kọmply</span>
+  </a>
+  <div class="nav-links">
+    <a href="#who">Who We Serve</a>
+    <a href="#calculator">Tax Calculator</a>
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <div class="nav-actions">
+    <a href="#" class="nav-login">
+      Login
+      <span class="soon">Coming Soon</span>
+    </a>
+    <a href="#waitlist" class="nav-cta">Get Started</a>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Nigeria's Compliance &amp; Tax Platform — Early Access Now Open
     </div>
-  </section>
+    <h1>Stop Paying Fines.<br>Start Being <em>Fully Compliant.</em></h1>
+    <p class="hero-desc">Kọmply is Nigeria's TurboTax — automating PAYE, pension remittances, CAC filings and personal income tax returns for <strong style="color:#fff">businesses</strong> and <strong style="color:#fff">individuals</strong> alike. We do the hard work. You stay protected.</p>
+    <p class="hero-note">For businesses with 1–500+ staff &nbsp;·&nbsp; For individuals, freelancers and salaried workers &nbsp;·&nbsp; Starting from ₦2,000/year</p>
+    <div class="hero-actions">
+      <a href="#waitlist" class="btn-primary">
+        <svg width="18" height="18"><use href="#ico-zap"/></svg>
+        Get Early Access Free
+      </a>
+      <a href="#calculator" class="btn-ghost">
+        <svg width="18" height="18"><use href="#ico-calculator"/></svg>
+        Try Tax Calculator
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">41M+</div><div class="stat-label">Nigerian businesses unserved</div></div>
+      <div><div class="stat-num">80M+</div><div class="stat-label">Nigerians who must file tax</div></div>
+      <div><div class="stat-num">₦100K</div><div class="stat-label">Average business fine avoided</div></div>
+      <div><div class="stat-num">7</div><div class="stat-label">Monthly obligations tracked</div></div>
+    </div>
+  </div>
+</section>
 
-  <div class="problem-strip">
-    <span class="problem-pill">⚠ 2026 NRS Act</span>
-    <strong>New Nigerian tax reforms are now in effect.</strong>
-    <span>Miss a filing and face ₦100,000 in your first month — then ₦50,000 every month after.</span>
+<!-- ══ ALERT ══ -->
+<div class="alert-strip">
+  <span class="alert-pill">
+    <svg width="12" height="12"><use href="#ico-warning"/></svg>
+    2026 NRS Act Now In Effect
+  </span>
+  <strong>Businesses face ₦100,000 in month one + ₦50,000 every month after.</strong>
+  <span>Individuals face ₦25,000 for missing the March 31 personal tax deadline. Is your business and household protected?</span>
+</div>
+
+<!-- ══ WHO WE SERVE ══ -->
+<section class="sec sec-white" id="who">
+  <div class="sec-label">
+    <svg width="14" height="14"><use href="#ico-users"/></svg>
+    Who We Serve
+  </div>
+  <h2 class="sec-title">Built for Every Nigerian<br>With a Tax Obligation</h2>
+  <p class="sec-sub">Whether you run a business or earn a salary — Kọmply has a solution built specifically for you.</p>
+  <div class="serve-grid">
+    <div class="serve-card biz">
+      <span class="serve-tag">
+        <svg width="12" height="12"><use href="#ico-building"/></svg>
+        For Businesses
+      </span>
+      <h3>SMEs, Startups &amp; Enterprises</h3>
+      <p>Running a Nigerian business means 7 monthly compliance obligations. Miss one and face fines that compound every month. Kọmply automates every single one — so you focus on growth.</p>
+      <ul class="serve-list">
+        <li><span class="check-icon"><svg><use href="#ico-check"/></svg></span>PAYE tax calculated and scheduled automatically every month</li>
+        <li><span class="check-icon"><svg><use href="#ico-check"/></svg></span>Pension remittance — 8% employee + 10% employer</li>
+        <li><span class="check-icon"><svg><use href="#ico-check"/></svg></span>CAC annual return tracking and deadline reminders</li>
+        <li><span class="check-icon"><svg><use href="#ico-check"/></svg></span>NSITF, NHF and VAT deadline management</li>
+        <li><span class="check-icon"><svg><use href="#ico-check"/></svg></span>Professional payslip generation for every employee</li>
+        <li><span class="check-icon"><svg><use href="#ico-check"/></svg></span>Compliance Health Score — real-time 0 to 100 rating</li>
+      </ul>
+      <div class="serve-price">Starting from ₦5,000/month · 1 to 3 staff</div>
+    </div>
+    <div class="serve-card ind">
+      <span class="serve-tag">
+        <svg width="12" height="12"><use href="#ico-user"/></svg>
+        For Individuals
+      </span>
+      <h3>Employees, Freelancers &amp; Self-Employed</h3>
+      <p>The 2026 NRS Act means every Nigerian adult earning income must file a personal tax return by March 31 — even if your employer deducts PAYE. Most Nigerians do not know this yet.</p>
+      <ul class="serve-list">
+        <li><span class="check-icon"><svg><use href="#ico-check"/></svg></span>Personal income tax return — guided and filed correctly</li>
+        <li><span class="check-icon"><svg><use href="#ico-check"/></svg></span>Nil Return filing for those below the tax threshold</li>
+        <li><span class="check-icon"><svg><use href="#ico-check"/></svg></span>Multiple income stream management — salary, freelance, rent</li>
+        <li><span class="check-icon"><svg><use href="#ico-check"/></svg></span>March 31 deadline reminders and step-by-step preparation</li>
+        <li><span class="check-icon"><svg><use href="#ico-check"/></svg></span>Ask Ada anything in English or Pidgin — available 24/7</li>
+        <li><span class="check-icon"><svg><use href="#ico-check"/></svg></span>Tax clearance certificate download on completion</li>
+      </ul>
+      <div class="serve-price">From ₦2,000/year · Single income &nbsp;·&nbsp; ₦5,000/year · Multiple streams</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CALCULATOR ══ -->
+<section class="sec sec-off" id="calculator">
+  <div class="sec-label">
+    <svg width="14" height="14"><use href="#ico-calculator"/></svg>
+    Live Tax Calculator
+  </div>
+  <h2 class="sec-title">Calculate Your Exact Tax<br>Obligations Now — For Free</h2>
+  <p class="sec-sub">Enter your details and see your complete Nigerian tax breakdown instantly. No signup required. The full filing and tracking service is inside Kọmply.</p>
+  <div class="calc-tabs">
+    <button class="ctab active" onclick="switchCalc(this,'personal')">
+      <svg><use href="#ico-user"/></svg>
+      Personal Income Tax
+    </button>
+    <button class="ctab" onclick="switchCalc(this,'payroll')">
+      <svg><use href="#ico-building"/></svg>
+      Business Payroll &amp; PAYE
+    </button>
   </div>
 
-  <section class="how" id="how">
-    <div class="reveal">
-      <p class="section-label">How It Works</p>
-      <h2 class="section-title">Compliance in three simple steps</h2>
-      <p class="section-sub">No accountant needed. No confusing forms. Just clear, automated compliance that keeps your business protected.</p>
+  <div class="calc-panel active" id="calc-personal">
+    <div class="calc-form">
+      <h3>Personal Income Tax Calculator</h3>
+      <p>Enter your income details from your payslip to see your exact personal tax obligations under Nigerian law.</p>
+      <div class="form-group"><label><svg><use href="#ico-money"/></svg>Monthly Gross Salary (₦)</label><input type="number" id="p-gross" placeholder="e.g. 250,000" oninput="calcPersonal()"></div>
+      <div class="form-group"><label><svg><use href="#ico-building"/></svg>Monthly Housing Allowance (₦)</label><input type="number" id="p-rent" placeholder="e.g. 50,000" oninput="calcPersonal()"></div>
+      <div class="form-group"><label><svg><use href="#ico-zap"/></svg>Monthly Transport Allowance (₦)</label><input type="number" id="p-transport" placeholder="e.g. 30,000" oninput="calcPersonal()"></div>
+      <div class="form-group"><label><svg><use href="#ico-tag"/></svg>Other Monthly Allowances (₦)</label><input type="number" id="p-other" placeholder="e.g. 20,000" oninput="calcPersonal()"></div>
+      <div class="form-group"><label><svg><use href="#ico-trending"/></svg>Other Monthly Income — freelance, rent (₦)</label><input type="number" id="p-extra" placeholder="e.g. 100,000" oninput="calcPersonal()"></div>
+      <button class="calc-btn" onclick="calcPersonal()">
+        <svg><use href="#ico-calculator"/></svg>
+        Calculate My Tax
+      </button>
     </div>
-    <div class="steps-grid reveal">
-      <div class="step"><div class="step-num">01</div><h3>Register Your Business</h3><p>Sign up in minutes. Enter your company details and staff. Komply sets up your personalised compliance dashboard at yourbusiness.komply.com.</p></div>
-      <div class="step"><div class="step-num">02</div><h3>We Calculate Everything</h3><p>Enter salaries and Komply instantly calculates PAYE, pension (18% split), NHF, NSITF, and generates your payment schedule and payslips.</p></div>
-      <div class="step"><div class="step-num">03</div><h3>Never Miss a Deadline</h3><p>Your compliance calendar tracks every obligation. Get reminders 14 days, 7 days, and 24 hours before each deadline.</p></div>
-    </div>
-  </section>
-
-  <section class="features" id="features">
-    <div class="reveal">
-      <p class="section-label">Features</p>
-      <h2 class="section-title">Everything your business needs to stay compliant</h2>
-      <p class="section-sub">Built specifically for how Nigerian businesses actually operate.</p>
-    </div>
-    <div class="features-grid reveal">
-      <div class="feature-card"><div class="feature-icon">🧮</div><h3>Smart Payroll Engine</h3><p>Auto-calculates PAYE, pension, NHF and NSITF. Generates payslips and remittance schedules instantly.</p></div>
-      <div class="feature-card"><div class="feature-icon">📅</div><h3>Compliance Calendar</h3><p>Know exactly what to file, when to file it, and what it costs — weeks before the deadline.</p></div>
-      <div class="feature-card"><div class="feature-icon">🤖</div><h3>AI Compliance Advisor</h3><p>Ask any tax or HR question in plain English or Pidgin — 24 hours a day.</p></div>
-      <div class="feature-card"><div class="feature-icon">🏢</div><h3>Your Own Dashboard</h3><p>Every business gets a personalised subdomain — adenikehub.komply.com.</p></div>
-      <div class="feature-card"><div class="feature-icon">📁</div><h3>Document Vault</h3><p>Store all compliance certificates, PAYE receipts, pension schedules in one secure place.</p></div>
-      <div class="feature-card"><div class="feature-icon">💬</div><h3>WhatsApp Reminders</h3><p>Receive compliance deadline reminders directly on WhatsApp — no login needed.</p></div>
-    </div>
-  </section>
-
-  <section class="subdomain-section">
-    <div class="subdomain-inner">
-      <div class="subdomain-text reveal">
-        <p class="section-label">Personalised Dashboard</p>
-        <h2 class="section-title">Your compliance office — at your own URL</h2>
-        <p class="section-sub">Komply creates a personalised dashboard at yourbusiness.komply.com. It feels like your system, not a tool you're renting.</p>
-        <a href="#waitlist" class="btn-primary" style="margin-top:8px;display:inline-flex;">Claim Your Dashboard →</a>
+    <div class="calc-results">
+      <h3><svg><use href="#ico-chart"/></svg>Your Tax Breakdown</h3>
+      <div class="result-placeholder" id="personal-placeholder">
+        <svg><use href="#ico-calculator"/></svg>
+        <p>Enter your income details on the left to see your exact tax breakdown here.</p>
       </div>
-      <div class="url-demo reveal">
-        <div class="url-bar">
-          <div class="url-dots"><span></span><span></span><span></span></div>
-          <div class="url-text"><strong>adenikehub</strong>.komply.com</div>
+      <div id="personal-output" style="display:none">
+        <div class="result-row"><span class="result-label"><svg><use href="#ico-money"/></svg>Gross Annual Income</span><span class="result-val" id="r-annual"></span></div>
+        <div class="result-row"><span class="result-label"><svg><use href="#ico-shield"/></svg>Consolidated Relief (CRA)</span><span class="result-val pos" id="r-cra"></span></div>
+        <div class="result-row"><span class="result-label"><svg><use href="#ico-briefcase"/></svg>Pension Deduction (8%)</span><span class="result-val pos" id="r-pension-ded"></span></div>
+        <div class="result-row"><span class="result-label"><svg><use href="#ico-chart"/></svg>Taxable Income</span><span class="result-val" id="r-taxable"></span></div>
+        <div class="result-row"><span class="result-label"><svg><use href="#ico-file"/></svg>Annual PAYE Tax</span><span class="result-val neg" id="r-annual-tax"></span></div>
+        <div class="result-row"><span class="result-label"><svg><use href="#ico-calendar"/></svg>Monthly PAYE Tax</span><span class="result-val neg" id="r-monthly-tax"></span></div>
+        <div class="result-row"><span class="result-label"><svg><use href="#ico-building"/></svg>NHF Contribution (2.5%)</span><span class="result-val neg" id="r-nhf"></span></div>
+        <div class="result-total">
+          <span class="lbl">Monthly Net Pay</span>
+          <span class="amt" id="r-net"></span>
         </div>
-        <div class="url-body">
-          <div class="url-company">Adenike Hub</div>
-          <div class="url-tag">RC 1234567 · Lagos, Nigeria</div>
-          <div class="url-stats">
-            <div class="url-stat"><div class="url-stat-num">5/5</div><div class="url-stat-label">Staff paid</div></div>
-            <div class="url-stat"><div class="url-stat-num">100%</div><div class="url-stat-label">Compliance score</div></div>
-            <div class="url-stat"><div class="url-stat-num">₦0</div><div class="url-stat-label">Fines this year</div></div>
-            <div class="url-stat"><div class="url-stat-num">Apr 10</div><div class="url-stat-label">Next deadline</div></div>
+        <p class="calc-note">This is an estimate based on standard Nigerian tax law. Kọmply gives you exact calculations, tracks your deadlines and files your return — from ₦2,000/year.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="calc-panel" id="calc-payroll">
+    <div class="calc-form">
+      <h3>Business Payroll &amp; PAYE Calculator</h3>
+      <p>Calculate your total payroll obligations as a Nigerian employer — PAYE, pension, NHF, NSITF for each staff member.</p>
+      <div class="form-group"><label><svg><use href="#ico-user"/></svg>Employee Name</label><input type="text" id="b-name" placeholder="e.g. Adaeze Okonkwo"></div>
+      <div class="form-group"><label><svg><use href="#ico-money"/></svg>Monthly Gross Salary (₦)</label><input type="number" id="b-gross" placeholder="e.g. 350,000" oninput="calcBusiness()"></div>
+      <div class="form-group"><label><svg><use href="#ico-briefcase"/></svg>Basic Salary Component (₦)</label><input type="number" id="b-basic" placeholder="e.g. 200,000 — usually 40–60% of gross" oninput="calcBusiness()"></div>
+      <div class="form-group"><label><svg><use href="#ico-building"/></svg>State of Operation</label>
+        <select id="b-state" onchange="calcBusiness()">
+          <option value="">Select state...</option>
+          <option>Lagos</option><option>Abuja (FCT)</option><option>Rivers</option><option>Ogun</option><option>Kano</option><option>Other State</option>
+        </select>
+      </div>
+      <button class="calc-btn" onclick="calcBusiness()">
+        <svg><use href="#ico-calculator"/></svg>
+        Calculate Payroll
+      </button>
+    </div>
+    <div class="calc-results">
+      <h3><svg><use href="#ico-chart"/></svg>Payroll Breakdown</h3>
+      <div class="result-placeholder" id="business-placeholder">
+        <svg><use href="#ico-building"/></svg>
+        <p>Enter employee salary details on the left to see the full payroll breakdown here.</p>
+      </div>
+      <div id="business-output" style="display:none">
+        <div class="result-row"><span class="result-label"><svg><use href="#ico-money"/></svg>Gross Monthly Salary</span><span class="result-val" id="b-r-gross"></span></div>
+        <div class="result-row"><span class="result-label"><svg><use href="#ico-file"/></svg>PAYE Tax (employee deduction)</span><span class="result-val neg" id="b-r-paye"></span></div>
+        <div class="result-row"><span class="result-label"><svg><use href="#ico-briefcase"/></svg>Employee Pension (8%)</span><span class="result-val neg" id="b-r-emp-pen"></span></div>
+        <div class="result-row"><span class="result-label"><svg><use href="#ico-briefcase"/></svg>Employer Pension (10%)</span><span class="result-val neg" id="b-r-er-pen"></span></div>
+        <div class="result-row"><span class="result-label"><svg><use href="#ico-building"/></svg>NHF Contribution (2.5%)</span><span class="result-val neg" id="b-r-nhf"></span></div>
+        <div class="result-row"><span class="result-label"><svg><use href="#ico-shield"/></svg>NSITF (1% of gross)</span><span class="result-val neg" id="b-r-nsitf"></span></div>
+        <div class="result-row"><span class="result-label"><svg><use href="#ico-user"/></svg>Employee Net Pay</span><span class="result-val pos" id="b-r-net"></span></div>
+        <div class="result-row"><span class="result-label"><svg><use href="#ico-trending"/></svg>Total Employer Cost</span><span class="result-val" id="b-r-total-cost"></span></div>
+        <div class="result-total">
+          <span class="lbl">Total Monthly Remittance</span>
+          <span class="amt" id="b-r-remittance"></span>
+        </div>
+        <p class="calc-note">Includes all amounts you must remit to FIRS, your PFA, FMBN and NSITF. Kọmply tracks exactly when and where to pay each one — automatically.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FEATURES ══ -->
+<section class="sec sec-white" id="features">
+  <div class="sec-label">
+    <svg width="14" height="14"><use href="#ico-zap"/></svg>
+    Platform Features
+  </div>
+  <h2 class="sec-title">Everything You Need In One Place</h2>
+  <p class="sec-sub">Payroll, compliance tracking, AI guidance and tax filing in one seamless Nigerian-built platform. See what each plan unlocks.</p>
+  <div class="feat-tabs">
+    <button class="ftab active" onclick="switchFeat(this,'biz')">
+      <svg><use href="#ico-building"/></svg>
+      Business Features
+    </button>
+    <button class="ftab" onclick="switchFeat(this,'ind')">
+      <svg><use href="#ico-user"/></svg>
+      Individual Features
+    </button>
+  </div>
+  <div class="feat-panel active" id="feat-biz">
+    <div class="feat-card">
+      <div class="icon-box"><svg><use href="#ico-calculator"/></svg></div>
+      <h4>Smart Payroll Engine</h4>
+      <p>Auto-calculates PAYE using official Nigerian tax bands, employee and employer pension, NHF and NSITF for every staff member every month.</p>
+      <span class="feat-badge green">All Plans</span>
+    </div>
+    <div class="feat-card">
+      <div class="icon-box"><svg><use href="#ico-calendar"/></svg></div>
+      <h4>Compliance Calendar</h4>
+      <p>All 7 Nigerian compliance deadlines in one colour-coded calendar. Green filed, gold due soon, red overdue. Never miss a date again.</p>
+      <span class="feat-badge green">All Plans</span>
+    </div>
+    <div class="feat-card">
+      <div class="icon-box"><svg><use href="#ico-trending"/></svg></div>
+      <h4>Compliance Health Score</h4>
+      <p>A live 0–100 score showing exactly where your business stands — like a credit score but for compliance. Know your risk level instantly.</p>
+      <span class="feat-badge both">Growth & Above</span>
+    </div>
+    <div class="feat-card">
+      <div class="icon-box"><svg><use href="#ico-file"/></svg></div>
+      <h4>Payslip &amp; Report Generator</h4>
+      <p>Generate professional PDF payslips for every employee and downloadable compliance reports for any filing period — in one click.</p>
+      <span class="feat-badge both">Growth & Above</span>
+      <br><span class="lock-badge"><svg><use href="#ico-lock"/></svg>Not available on Starter</span>
+    </div>
+    <div class="feat-card">
+      <div class="icon-box"><svg><use href="#ico-building"/></svg></div>
+      <h4>Personalised Dashboard</h4>
+      <p>Every business gets their own dashboard at yourbusiness.komply.com — your compliance office, always online, always up to date.</p>
+      <span class="feat-badge green">All Plans</span>
+    </div>
+    <div class="feat-card">
+      <div class="icon-box"><svg><use href="#ico-bell"/></svg></div>
+      <h4>WhatsApp &amp; Email Alerts</h4>
+      <p>Deadline reminders sent 14 days, 7 days and 24 hours before every filing via email. WhatsApp alerts on Growth plan and above.</p>
+      <span class="feat-badge gold">WhatsApp — Growth+</span>
+      <br><span class="lock-badge"><svg><use href="#ico-lock"/></svg>WhatsApp locked on Starter</span>
+    </div>
+  </div>
+  <div class="feat-panel" id="feat-ind">
+    <div class="feat-card">
+      <div class="icon-box"><svg><use href="#ico-file"/></svg></div>
+      <h4>Personal Tax Return Filing</h4>
+      <p>Guided step-by-step personal income tax preparation — enter your payslip details and Kọmply handles the entire filing process correctly.</p>
+      <span class="feat-badge green">All Individual Plans</span>
+    </div>
+    <div class="feat-card">
+      <div class="icon-box"><svg><use href="#ico-money"/></svg></div>
+      <h4>Multi-Income Calculator</h4>
+      <p>Earn from salary, freelance work, rental income and investments? Kọmply combines all streams and calculates exactly what you owe.</p>
+      <span class="feat-badge both">Multiple Streams Plan</span>
+      <br><span class="lock-badge"><svg><use href="#ico-lock"/></svg>Locked on Single Income plan</span>
+    </div>
+    <div class="feat-card">
+      <div class="icon-box"><svg><use href="#ico-award"/></svg></div>
+      <h4>Tax Clearance Certificate</h4>
+      <p>Download your official tax clearance certificate once filed — required for bank loans, property, government contracts and international travel.</p>
+      <span class="feat-badge green">All Individual Plans</span>
+    </div>
+    <div class="feat-card">
+      <div class="icon-box"><svg><use href="#ico-chart"/></svg></div>
+      <h4>Nil Return Filing</h4>
+      <p>Earn below ₦800,000 annually? You still must file a Nil Return by March 31. Kọmply files it for you in under 5 minutes.</p>
+      <span class="feat-badge green">All Individual Plans</span>
+    </div>
+    <div class="feat-card">
+      <div class="icon-box"><svg><use href="#ico-trending"/></svg></div>
+      <h4>Personal Compliance Score</h4>
+      <p>Know exactly where you stand with your personal tax obligations — a clear 0–100 score showing your compliance health at a glance.</p>
+      <span class="feat-badge both">Multiple Streams Plan</span>
+    </div>
+    <div class="feat-card">
+      <div class="icon-box"><svg><use href="#ico-calendar"/></svg></div>
+      <h4>March 31 Countdown</h4>
+      <p>Never miss Nigeria's individual tax deadline again. Kọmply counts down and sends reminders starting 30 days before the due date.</p>
+      <span class="feat-badge green">All Individual Plans</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ADA ══ -->
+<section class="sec sec-dark ada-section">
+  <div class="ada-inner">
+    <div class="ada-left">
+      <div class="sec-label">
+        <svg width="14" height="14"><use href="#ico-bot"/></svg>
+        Meet Ada
+      </div>
+      <h2 class="sec-title">Your Personal Nigerian Tax Advisor — Available 24/7</h2>
+      <p class="sec-sub">Ada is Kọmply's AI compliance advisor. She knows Nigerian tax law inside out and speaks your language — English or Pidgin.</p>
+      <ul class="ada-features">
+        <li>
+          <span class="ada-feat-icon"><svg><use href="#ico-globe"/></svg></span>
+          <span>Answers in plain English or Pidgin — your choice</span>
+        </li>
+        <li>
+          <span class="ada-feat-icon"><svg><use href="#ico-zap"/></svg></span>
+          <span>Instant answers to PAYE, pension, CAC and VAT questions</span>
+        </li>
+        <li>
+          <span class="ada-feat-icon"><svg><use href="#ico-brain"/></svg></span>
+          <span>Knows the 2026 NRS Act and all Nigerian tax laws in depth</span>
+        </li>
+        <li>
+          <span class="ada-feat-icon"><svg><use href="#ico-users"/></svg></span>
+          <span>Serves both business owners and individual taxpayers</span>
+        </li>
+        <li>
+          <span class="ada-feat-icon"><svg><use href="#ico-shield"/></svg></span>
+          <span>Your data stays completely private and secure at all times</span>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <div class="ada-chat">
+        <div class="chat-header">
+          <div class="chat-avatar"><svg><use href="#ico-bot"/></svg></div>
+          <div>
+            <div class="chat-name">Ada — AI Compliance Advisor</div>
+            <div class="chat-status"><span class="status-dot"></span> Online now · Knows Nigerian tax law</div>
           </div>
-          <div class="url-alert">
-            <div class="url-alert-icon">⏰</div>
-            <div class="url-alert-text"><strong>Pension remittance due in 5 days</strong>₦134,000 · 3 employees</div>
-          </div>
+        </div>
+        <div class="chat-messages">
+          <div class="msg user">Do I need to file tax even though my employer pays PAYE?</div>
+          <div class="msg ada">Yes — and many Nigerians don't know this. Even if your employer remits PAYE, you must still file a personal income tax return with your State Internal Revenue Service by March 31 every year. The 2026 NRS Act made this mandatory for everyone. Kọmply handles your filing automatically. Want me to get started?</div>
+          <div class="msg user">When is PAYE due for my business?</div>
+          <div class="msg ada">PAYE dey due on the 10th of every month. For your business I go calculate the exact naira amount based on your staff salaries and remind you 14 days before. No wahala — Kọmply get you covered!</div>
+        </div>
+        <div class="chat-input">
+          <span>Ask Ada anything about Nigerian compliance...</span>
+          <button class="chat-send"><svg><use href="#ico-send"/></svg></button>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="pricing" id="pricing">
-    <div class="reveal">
-      <p class="section-label">Pricing</p>
-      <h2 class="section-title">Less than one compliance fine. Every month.</h2>
-      <p class="section-sub">Transparent naira pricing. No hidden fees. Cancel anytime.</p>
+<!-- ══ HOW IT WORKS ══ -->
+<section class="sec sec-off">
+  <div class="sec-label">
+    <svg width="14" height="14"><use href="#ico-settings"/></svg>
+    How It Works
+  </div>
+  <h2 class="sec-title">Get Fully Compliant in 3 Steps</h2>
+  <p class="sec-sub">Whether you are a business owner or an individual — getting compliant with Kọmply takes less than 10 minutes.</p>
+  <div class="how-tabs">
+    <button class="htab active" onclick="switchHow(this,'hbiz')">
+      <svg><use href="#ico-building"/></svg>
+      For Businesses
+    </button>
+    <button class="htab" onclick="switchHow(this,'hind')">
+      <svg><use href="#ico-user"/></svg>
+      For Individuals
+    </button>
+  </div>
+  <div class="how-panel active" id="how-hbiz">
+    <div class="step-card"><div class="step-num">01</div><h4><svg><use href="#ico-building"/></svg>Register Your Business</h4><p>Enter your business name, number of staff and state of operation. Kọmply instantly sets up your personalised compliance dashboard at yourbusiness.komply.com.</p></div>
+    <div class="step-card"><div class="step-num">02</div><h4><svg><use href="#ico-calculator"/></svg>We Calculate Everything</h4><p>Kọmply auto-calculates your PAYE, pension, NHF, NSITF and VAT every month. Exact naira amounts. Zero guesswork. Zero errors. Zero stress.</p></div>
+    <div class="step-card"><div class="step-num">03</div><h4><svg><use href="#ico-shield"/></svg>Stay Protected Forever</h4><p>Get deadline reminders before every filing, mark payments as done and watch your compliance score reach 100. Never pay an avoidable fine again.</p></div>
+  </div>
+  <div class="how-panel" id="how-hind">
+    <div class="step-card"><div class="step-num">01</div><h4><svg><use href="#ico-message"/></svg>Answer Simple Questions</h4><p>Tell Kọmply how you earn — salary, freelance, rental, investment. Plain questions in English or Pidgin. No tax jargon. No confusion.</p></div>
+    <div class="step-card"><div class="step-num">02</div><h4><svg><use href="#ico-file"/></svg>We Prepare Your Return</h4><p>Kọmply calculates exactly what you owe, prepares your personal income tax return and guides you step by step through submission before March 31.</p></div>
+    <div class="step-card"><div class="step-num">03</div><h4><svg><use href="#ico-award"/></svg>Download Your Certificate</h4><p>Get your tax clearance certificate — use it for bank loans, property purchases, government contracts and any situation requiring proof of compliance.</p></div>
+  </div>
+</section>
+
+<!-- ══ PRICING ══ -->
+<section class="sec sec-white" id="pricing">
+  <div class="sec-label">
+    <svg width="14" height="14"><use href="#ico-tag"/></svg>
+    Simple Pricing
+  </div>
+  <h2 class="sec-title">Less Than One Compliance Fine</h2>
+  <p class="sec-sub">Transparent naira pricing. No foreign exchange stress. No hidden fees. Cancel anytime.</p>
+  <div class="sec-label" style="margin-bottom:20px">
+    <svg width="14" height="14"><use href="#ico-building"/></svg>
+    Business Plans
+  </div>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-tier">Starter</div>
+      <div class="price-name">Micro Business</div>
+      <div class="price-amount">₦5,000</div>
+      <div class="price-period">per month · 1–3 staff</div>
+      <div class="price-div"></div>
+      <ul class="price-feats">
+        <li class="included"><svg><use href="#ico-check"/></svg>PAYE calculator</li>
+        <li class="included"><svg><use href="#ico-check"/></svg>Pension tracking</li>
+        <li class="included"><svg><use href="#ico-check"/></svg>Compliance calendar</li>
+        <li class="included"><svg><use href="#ico-check"/></svg>Ada AI — 10 questions/month</li>
+        <li class="included"><svg><use href="#ico-check"/></svg>Email deadline reminders</li>
+        <li class="locked"><svg><use href="#ico-lock"/></svg>No payslip generation</li>
+        <li class="locked"><svg><use href="#ico-lock"/></svg>No WhatsApp alerts</li>
+        <li class="locked"><svg><use href="#ico-lock"/></svg>No compliance score</li>
+      </ul>
+      <a href="#waitlist" class="price-btn">
+        Get Started
+        <svg><use href="#ico-arrow-right"/></svg>
+      </a>
     </div>
-    <div class="pricing-grid reveal">
-      <div class="price-card">
-        <div class="price-tier">Starter</div>
-        <div class="price-amount">₦5,000</div>
-        <div class="price-period">per month · 1–3 staff</div>
-        <div class="price-divider"></div>
-        <ul class="price-features"><li>Compliance Calendar</li><li>AI Advisor (10 queries/month)</li><li>Deadline reminders</li><li>Personalised subdomain</li></ul>
+    <div class="price-card featured">
+      <div class="pop-badge">Most Popular</div>
+      <div class="price-tier">Growth</div>
+      <div class="price-name">Small Business</div>
+      <div class="price-amount">₦15,000</div>
+      <div class="price-period">per month · 4–20 staff</div>
+      <div class="price-div"></div>
+      <ul class="price-feats">
+        <li class="included"><svg><use href="#ico-check"/></svg>Everything in Starter</li>
+        <li class="included"><svg><use href="#ico-check"/></svg>Unlimited Ada AI questions</li>
+        <li class="included"><svg><use href="#ico-check"/></svg>Payslip generation — unlimited</li>
+        <li class="included"><svg><use href="#ico-check"/></svg>PDF compliance reports</li>
+        <li class="included"><svg><use href="#ico-check"/></svg>WhatsApp deadline reminders</li>
+        <li class="included"><svg><use href="#ico-check"/></svg>Compliance Health Score</li>
+        <li class="included"><svg><use href="#ico-check"/></svg>Filing history and records</li>
+        <li class="included"><svg><use href="#ico-check"/></svg>Priority email support</li>
+      </ul>
+      <a href="#waitlist" class="price-btn">
+        Get Started
+        <svg><use href="#ico-arrow-right"/></svg>
+      </a>
+    </div>
+    <div class="price-card">
+      <div class="price-tier">Business</div>
+      <div class="price-name">Medium Business</div>
+      <div class="price-amount">₦35,000</div>
+      <div class="price-period">per month · 21–50 staff</div>
+      <div class="price-div"></div>
+      <ul class="price-feats">
+        <li class="included"><svg><use href="#ico-check"/></svg>Everything in Growth</li>
+        <li class="included"><svg><use href="#ico-check"/></svg>Multi-staff management</li>
+        <li class="included"><svg><use href="#ico-check"/></svg>Accountant partner access</li>
+        <li class="included"><svg><use href="#ico-check"/></svg>Advanced analytics dashboard</li>
+        <li class="included"><svg><use href="#ico-check"/></svg>Custom compliance reports</li>
+        <li class="included"><svg><use href="#ico-check"/></svg>Dedicated account manager</li>
+        <li class="locked"><svg><use href="#ico-lock"/></svg>No API access</li>
+        <li class="locked"><svg><use href="#ico-lock"/></svg>No custom integrations</li>
+      </ul>
+      <a href="#waitlist" class="price-btn">
+        Get Started
+        <svg><use href="#ico-arrow-right"/></svg>
+      </a>
+    </div>
+    <div class="price-card">
+      <div class="price-tier">Enterprise</div>
+      <div class="price-name">Large Business</div>
+      <div class="price-amount">Custom</div>
+      <div class="price-period">50+ staff · tailored plan</div>
+      <div class="price-div"></div>
+      <ul class="price-feats">
+        <li class="included"><svg><use href="#ico-check"/></svg>Everything in Business</li>
+        <li class="included"><svg><use href="#ico-check"/></svg>Unlimited staff</li>
+        <li class="included"><svg><use href="#ico-check"/></svg>Custom integrations</li>
+        <li class="included"><svg><use href="#ico-check"/></svg>Full API access</li>
+        <li class="included"><svg><use href="#ico-check"/></svg>SLA guarantee</li>
+        <li class="included"><svg><use href="#ico-check"/></svg>Onboarding support</li>
+        <li class="included"><svg><use href="#ico-check"/></svg>White label option</li>
+        <li class="included"><svg><use href="#ico-check"/></svg>Direct FIRS integration</li>
+      </ul>
+      <a href="mailto:hello@komply.com.ng" class="price-btn">
+        Contact Us
+        <svg><use href="#ico-arrow-right"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="sec-label" style="margin:40px 0 16px">
+    <svg width="14" height="14"><use href="#ico-user"/></svg>
+    Individual Plan
+  </div>
+  <div class="ind-pricing">
+    <div>
+      <h3>Kọmply Personal — Individual Tax Filing</h3>
+      <p>For salaried employees, freelancers, self-employed Nigerians and anyone with rental or investment income. File your personal income tax return correctly before March 31 — with Ada AI guidance included. No accountant needed.</p>
+    </div>
+    <div class="ind-right">
+      <div class="ind-amount">₦2,000</div>
+      <div class="ind-mo">per year · single income stream</div>
+      <div class="ind-amount" style="font-size:26px;margin-top:8px">₦5,000</div>
+      <div class="ind-mo">per year · multiple income streams</div>
+      <a href="#waitlist" class="btn-primary" style="display:inline-flex;font-size:13px;padding:11px 22px;margin-top:14px">
+        Get Early Access
+        <svg width="14" height="14"><use href="#ico-arrow-right"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section class="sec sec-off center" id="faq">
+  <div class="sec-label" style="justify-content:center">
+    <svg width="14" height="14"><use href="#ico-question"/></svg>
+    Frequently Asked Questions
+  </div>
+  <h2 class="sec-title">Everything You Need to Know</h2>
+  <p class="sec-sub" style="margin:0 auto 48px">Clear answers about Kọmply, Nigerian compliance obligations and how it all works.</p>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-left"><div class="faq-q-icon"><svg><use href="#ico-user"/></svg></div><span>Do I need to file tax if my employer already deducts PAYE?</span></div>
+        <svg class="faq-arrow"><use href="#ico-plus"/></svg>
       </div>
-      <div class="price-card featured">
-        <div class="featured-badge">Most Popular</div>
-        <div class="price-tier">Growth</div>
-        <div class="price-amount">₦15,000</div>
-        <div class="price-period">per month · 4–20 staff</div>
-        <div class="price-divider"></div>
-        <ul class="price-features"><li>Full Payroll Engine</li><li>Compliance Calendar</li><li>Unlimited AI Advisor</li><li>Personalised dashboard</li><li>Payslip generation</li><li>Priority support</li></ul>
+      <div class="faq-a">Yes — and this is the most common misconception in Nigeria. Even if your employer remits PAYE on your behalf, you are still legally required to file a personal annual tax return with your State Internal Revenue Service by March 31 every year. The 2026 NRS Act made this strictly enforceable with a ₦25,000 first-month penalty. Kọmply handles this entire process for you.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-left"><div class="faq-q-icon"><svg><use href="#ico-warning"/></svg></div><span>What is the penalty for late PAYE remittance?</span></div>
+        <svg class="faq-arrow"><use href="#ico-plus"/></svg>
       </div>
-      <div class="price-card">
-        <div class="price-tier">Business</div>
-        <div class="price-amount">₦35,000</div>
-        <div class="price-period">per month · 21–50 staff</div>
-        <div class="price-divider"></div>
-        <ul class="price-features"><li>Everything in Growth</li><li>Document Vault</li><li>Multiple user logins</li><li>WhatsApp reminders</li><li>Dedicated support</li></ul>
+      <div class="faq-a">Under the 2026 NRS Act, businesses that fail to remit PAYE by the 10th of each month face a ₦100,000 fine in the first month, then ₦50,000 for every subsequent month of default. Unpaid amounts also attract 10% interest per annum. Kọmply tracks your PAYE deadline and reminds you automatically before it is due.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-left"><div class="faq-q-icon"><svg><use href="#ico-calculator"/></svg></div><span>How does Kọmply calculate PAYE?</span></div>
+        <svg class="faq-arrow"><use href="#ico-plus"/></svg>
       </div>
-      <div class="price-card">
-        <div class="price-tier">Enterprise</div>
-        <div class="price-amount">Custom</div>
-        <div class="price-period">50+ staff · multi-entity</div>
-        <div class="price-divider"></div>
-        <ul class="price-features"><li>Everything in Business</li><li>Custom onboarding</li><li>Account manager</li><li>White-label option</li><li>API access</li></ul>
+      <div class="faq-a">Kọmply uses the official Nigerian PAYE tax bands: 7% on the first ₦300,000 of taxable income, 11% on the next ₦300,000, 15% on the next ₦500,000, 19% on the next ₦500,000, 21% on the next ₦1,600,000, and 24% on anything above ₦3,200,000. We also apply the Consolidated Relief Allowance (CRA) of ₦200,000 plus 20% of gross income before calculating tax.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-left"><div class="faq-q-icon"><svg><use href="#ico-briefcase"/></svg></div><span>What is the correct pension split in Nigeria?</span></div>
+        <svg class="faq-arrow"><use href="#ico-plus"/></svg>
+      </div>
+      <div class="faq-a">Under the Pension Reform Act, both employer and employee contribute to a Pension Fund Administrator. The employee contributes a minimum of 8% of monthly emoluments and the employer contributes a minimum of 10% — totalling a minimum of 18%. Kọmply calculates both contributions automatically and tells you exactly when and where to remit each month.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-left"><div class="faq-q-icon"><svg><use href="#ico-trending"/></svg></div><span>I am a freelancer — do I need to pay tax in Nigeria?</span></div>
+        <svg class="faq-arrow"><use href="#ico-plus"/></svg>
+      </div>
+      <div class="faq-a">Yes. All income earned in Nigeria — including freelance, consulting, rental and investment income — is taxable. Freelancers must register with their State Internal Revenue Service, file annual returns by March 31 and pay tax on net income. Kọmply's Personal plan is built specifically for freelancers and self-employed Nigerians.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-left"><div class="faq-q-icon"><svg><use href="#ico-shield"/></svg></div><span>Is my data safe with Kọmply?</span></div>
+        <svg class="faq-arrow"><use href="#ico-plus"/></svg>
+      </div>
+      <div class="faq-a">Absolutely. Kọmply uses 256-bit SSL encryption for all data in transit and at rest. We never sell or share your personal or business financial data with third parties. Your compliance data belongs to you — we are simply the engine that helps you manage it.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-left"><div class="faq-q-icon"><svg><use href="#ico-zap"/></svg></div><span>When does Kọmply launch?</span></div>
+        <svg class="faq-arrow"><use href="#ico-plus"/></svg>
+      </div>
+      <div class="faq-a">Kọmply is currently in development and accepting early access signups. The first 500 businesses and individuals on the waitlist will receive 3 months completely free and have their subdomain reserved at yourbusiness.komply.com. Join the waitlist above to secure your spot before we go live.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WAITLIST ══ -->
+<section class="sec sec-white center" id="waitlist">
+  <div class="wl-inner">
+    <div class="sec-label" style="justify-content:center">
+      <svg width="14" height="14"><use href="#ico-star"/></svg>
+      Early Access
+    </div>
+    <h2 class="sec-title">Join the Kọmply Waitlist</h2>
+    <p class="sec-sub">Be among the first 500 Nigerians — businesses and individuals — to get access. Early members get 3 months free and a reserved subdomain.</p>
+    <form class="wl-form" id="wl-form">
+      <input type="hidden" name="access_key" value="83ebab66-128e-428b-8131-ef1ec2a37bd7">
+      <div class="wl-row">
+        <input type="text" name="name" placeholder="Your Full Name" class="wl-input" required>
+        <input type="email" name="email" placeholder="Email Address" class="wl-input" required>
+      </div>
+      <div class="wl-row">
+        <input type="tel" name="whatsapp" placeholder="WhatsApp Number (e.g. 08012345678)" class="wl-input">
+        <select name="type" class="wl-input" required>
+          <option value="" disabled selected>I am signing up as a...</option>
+          <option value="business-1-3">Business Owner — 1 to 3 staff</option>
+          <option value="business-4-20">Business Owner — 4 to 20 staff</option>
+          <option value="business-21-50">Business Owner — 21 to 50 staff</option>
+          <option value="business-50+">Business Owner — 50+ staff</option>
+          <option value="individual-salary">Individual — Salaried Employee</option>
+          <option value="individual-freelance">Individual — Freelancer or Self-employed</option>
+          <option value="individual-multiple">Individual — Multiple Income Streams</option>
+          <option value="accountant">Accountant or Finance Professional</option>
+        </select>
+      </div>
+      <input type="text" name="business" placeholder="Business or Employer Name (optional)" class="wl-input">
+      <button type="submit" class="wl-submit">
+        <svg><use href="#ico-zap"/></svg>
+        Reserve My Early Access Spot
+      </button>
+      <p class="wl-note">
+        <svg><use href="#ico-lock"/></svg>
+        No spam. No credit card required. Just your spot in line.
+      </p>
+    </form>
+    <div class="success-msg" id="success-msg">
+      <h4>You are on the list!</h4>
+      <p>Welcome to Kọmply. Check your email — a confirmation is on its way. We will be in touch before launch. Thank you for being an early believer.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="footer-logo">
+          <div class="footer-logo-box">K</div>
+          <span class="footer-logo-name">Kọmply</span>
+        </a>
+        <p>Nigeria's AI-powered compliance and tax platform — built for businesses and individuals alike. Making compliance effortless for every Nigerian.</p>
+        <div class="footer-social">
+          <a href="https://linkedin.com/company/komply" class="social-btn" title="LinkedIn"><svg><use href="#ico-linkedin"/></svg></a>
+          <a href="https://twitter.com/KomplyNG" class="social-btn" title="X / Twitter"><svg><use href="#ico-twitter"/></svg></a>
+          <a href="https://instagram.com/komply.ng" class="social-btn" title="Instagram"><svg><use href="#ico-instagram"/></svg></a>
+          <a href="mailto:hello@komply.com.ng" class="social-btn" title="Email"><svg><use href="#ico-mail"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href="#who"><svg><use href="#ico-info"/></svg>About Kọmply</a>
+        <a href="#"><svg><use href="#ico-star"/></svg>Our Mission</a>
+        <a href="#"><svg><use href="#ico-briefcase"/></svg>Careers</a>
+        <a href="#"><svg><use href="#ico-file"/></svg>Press &amp; Media</a>
+        <a href="#"><svg><use href="#ico-users"/></svg>Partner With Us</a>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <a href="#features"><svg><use href="#ico-building"/></svg>Business Compliance</a>
+        <a href="#features"><svg><use href="#ico-user"/></svg>Personal Tax Filing</a>
+        <a href="#calculator"><svg><use href="#ico-calculator"/></svg>Tax Calculator</a>
+        <a href="#"><svg><use href="#ico-shield"/></svg>Compliance Audit</a>
+        <a href="#"><svg><use href="#ico-briefcase"/></svg>Accountant Portal</a>
+      </div>
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <a href="#faq"><svg><use href="#ico-question"/></svg>FAQ</a>
+        <a href="#"><svg><use href="#ico-file"/></svg>Nigerian Tax Guide</a>
+        <a href="#calculator"><svg><use href="#ico-calculator"/></svg>PAYE Calculator</a>
+        <a href="#"><svg><use href="#ico-trending"/></svg>Compliance Blog</a>
+        <a href="#"><svg><use href="#ico-lock"/></svg>Privacy Policy</a>
+        <a href="#"><svg><use href="#ico-file"/></svg>Terms of Service</a>
+      </div>
+      <div class="footer-subscribe">
+        <h5>Stay Updated</h5>
+        <p>Get Nigerian compliance tips, deadline reminders and Kọmply product updates delivered to your inbox. No spam — ever.</p>
+        <div class="sub-form" id="sub-form">
+          <input type="email" class="sub-input" placeholder="Enter your email address" id="sub-email">
+          <button class="sub-btn" onclick="subscribeEmail()">
+            <svg><use href="#ico-send"/></svg>
+            Subscribe
+          </button>
+        </div>
+        <div id="sub-success" style="display:none;font-size:13px;color:var(--green-glow);margin-top:8px">You are subscribed. Welcome to the Kọmply community.</div>
       </div>
     </div>
-  </section>
-
-  <section class="waitlist" id="waitlist">
-    <div class="waitlist-inner">
-      <p class="section-label">Early Access</p>
-      <h2 class="section-title">Be first. Get your subdomain before someone else does.</h2>
-      <p class="section-sub">Join the waitlist today and get free early access, a free compliance audit, and a locked-in founder's rate for life.</p>
-
-      <form action="https://api.web3forms.com/submit" method="POST" class="waitlist-form" id="waitlistForm">
-        <input type="hidden" name="access_key" value="83ebab66-128e-428b-8131-ef1ec2a37bd7" />
-        <input type="hidden" name="subject" value="New Komply Waitlist Signup!" />
-        <input type="hidden" name="from_name" value="Komply Waitlist" />
-        <input type="hidden" name="autoresponse" value="Hi, thank you for joining the Komply waitlist! You are one of the first Nigerian business owners to take compliance seriously. Here is what happens next: 1. We will reach out within 48 hours on your WhatsApp. 2. You get free early access before public launch. 3. Your subdomain yourbusiness.komply.com will be reserved. Any questions? Reply to this email. Joel Onyekachi, Founder Komply hello@komply.com.ng komply.com.ng" />
-        <input type="text" name="name" placeholder="Your full name" required />
-        <input type="email" name="email" placeholder="Your email address" required />
-        <input type="text" name="whatsapp" placeholder="WhatsApp number (e.g. 08012345678)" required />
-        <input type="text" name="business" placeholder="Your business name" required />
-        <button type="submit" class="btn-primary">Join Waitlist →</button>
-      </form>
-
-      <div class="success-box" id="successBox">
-        <h3>You're on the list! 🎉</h3>
-        <p>Check your email for a confirmation.<br>We will reach out personally within 48 hours.</p>
-      </div>
-
-      <p class="waitlist-note" id="waitlistNote">No spam. No payment required. We'll reach out personally when we launch.</p>
-      <div class="waitlist-perks">
-        <div class="perk"><span class="perk-icon">✓</span> Free compliance audit</div>
-        <div class="perk"><span class="perk-icon">✓</span> Founder's pricing for life</div>
-        <div class="perk"><span class="perk-icon">✓</span> Your subdomain reserved</div>
+    <hr class="footer-divider">
+    <div class="footer-bottom">
+      <p>© 2026 Kọmply · Redberry Technology Africa Ltd · Lagos, Nigeria</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="mailto:hello@komply.com.ng">hello@komply.com.ng</a>
+        <a href="tel:+2348148564434">+234 8148564434</a>
       </div>
     </div>
-  </section>
+  </div>
+</footer>
 
-  <footer>
-    <div class="footer-logo">
-      <img src="K.png" alt="Komply" />
-      <div class="footer-text">Making compliance effortless<br>for every Nigerian business.</div>
-    </div>
-    <div class="footer-links">
-      <a href="mailto:hello@komply.com.ng">hello@komply.com.ng</a>
-      <a href="#features">Features</a>
-      <a href="#pricing">Pricing</a>
-    </div>
-  </footer>
+<script>
+function switchCalc(btn,tab){document.querySelectorAll('.ctab').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.calc-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById('calc-'+tab).classList.add('active')}
+function switchFeat(btn,tab){document.querySelectorAll('.ftab').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.feat-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById('feat-'+tab).classList.add('active')}
+function switchHow(btn,tab){document.querySelectorAll('.htab').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.how-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById('how-'+tab).classList.add('active')}
+function toggleFaq(el){el.parentElement.classList.toggle('open')}
+function fmt(n){return'₦'+Math.round(n).toLocaleString('en-NG')}
 
-  <script>
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
-    reveals.forEach(r => observer.observe(r));
+function calcPersonal(){
+  const gross=parseFloat(document.getElementById('p-gross').value)||0;
+  const rent=parseFloat(document.getElementById('p-rent').value)||0;
+  const transport=parseFloat(document.getElementById('p-transport').value)||0;
+  const other=parseFloat(document.getElementById('p-other').value)||0;
+  const extra=parseFloat(document.getElementById('p-extra').value)||0;
+  if(!gross)return;
+  const monthly=gross+rent+transport+other+extra;
+  const annual=monthly*12;
+  const cra=Math.max(200000,annual*0.01)+annual*0.2;
+  const pension=gross*0.08*12;
+  const nhfMonthly=gross*0.025;
+  const taxable=Math.max(0,annual-cra-pension);
+  let tax=0,rem=taxable;
+  for(const[lim,rate] of [[300000,.07],[300000,.11],[500000,.15],[500000,.19],[1600000,.21],[Infinity,.24]]){if(rem<=0)break;const c=Math.min(rem,lim);tax+=c*rate;rem-=c}
+  const mTax=tax/12;
+  const mPen=gross*0.08;
+  const net=monthly-mTax-mPen-nhfMonthly;
+  document.getElementById('personal-placeholder').style.display='none';
+  document.getElementById('personal-output').style.display='block';
+  document.getElementById('r-annual').textContent=fmt(annual);
+  document.getElementById('r-cra').textContent='-'+fmt(cra);
+  document.getElementById('r-pension-ded').textContent='-'+fmt(pension);
+  document.getElementById('r-taxable').textContent=fmt(taxable);
+  document.getElementById('r-annual-tax').textContent=fmt(tax);
+  document.getElementById('r-monthly-tax').textContent=fmt(mTax);
+  document.getElementById('r-nhf').textContent=fmt(nhfMonthly)+'/mo';
+  document.getElementById('r-net').textContent=fmt(net);
+}
 
-    const form = document.getElementById('waitlistForm');
-    const successBox = document.getElementById('successBox');
-    const waitlistNote = document.getElementById('waitlistNote');
+function calcBusiness(){
+  const gross=parseFloat(document.getElementById('b-gross').value)||0;
+  const basic=parseFloat(document.getElementById('b-basic').value)||gross*0.5;
+  if(!gross)return;
+  const annual=gross*12;
+  const cra=Math.max(200000,annual*0.01)+annual*0.2;
+  const aPen=gross*0.08*12;
+  const taxable=Math.max(0,annual-cra-aPen);
+  let tax=0,rem=taxable;
+  for(const[lim,rate] of [[300000,.07],[300000,.11],[500000,.15],[500000,.19],[1600000,.21],[Infinity,.24]]){if(rem<=0)break;const c=Math.min(rem,lim);tax+=c*rate;rem-=c}
+  const mPAYE=tax/12;
+  const empPen=gross*0.08;
+  const erPen=gross*0.10;
+  const nhf=basic*0.025;
+  const nsitf=gross*0.01;
+  const net=gross-mPAYE-empPen-nhf;
+  const remit=mPAYE+empPen+erPen+nhf+nsitf;
+  const cost=gross+erPen+nsitf;
+  document.getElementById('business-placeholder').style.display='none';
+  document.getElementById('business-output').style.display='block';
+  document.getElementById('b-r-gross').textContent=fmt(gross);
+  document.getElementById('b-r-paye').textContent=fmt(mPAYE);
+  document.getElementById('b-r-emp-pen').textContent=fmt(empPen);
+  document.getElementById('b-r-er-pen').textContent=fmt(erPen);
+  document.getElementById('b-r-nhf').textContent=fmt(nhf);
+  document.getElementById('b-r-nsitf').textContent=fmt(nsitf);
+  document.getElementById('b-r-net').textContent=fmt(net);
+  document.getElementById('b-r-total-cost').textContent=fmt(cost);
+  document.getElementById('b-r-remittance').textContent=fmt(remit);
+}
 
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const btn = form.querySelector('button[type="submit"]');
-      btn.textContent = 'Submitting...';
-      btn.disabled = true;
-      const formData = new FormData(form);
-      try {
-        const response = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData });
-        const data = await response.json();
-        if (data.success) {
-          form.style.display = 'none';
-          waitlistNote.style.display = 'none';
-          successBox.style.display = 'block';
-        } else {
-          btn.textContent = 'Something went wrong. Try again.';
-          btn.disabled = false;
-          btn.style.background = '#c0392b';
-        }
-      } catch (error) {
-        btn.textContent = 'Something went wrong. Try again.';
-        btn.disabled = false;
-        btn.style.background = '#c0392b';
-      }
-    });
-  </script>
+document.getElementById('wl-form').addEventListener('submit',function(e){
+  e.preventDefault();
+  const data=new FormData(this);
+  fetch('https://api.web3forms.com/submit',{method:'POST',body:data})
+    .then(r=>r.json()).then(()=>{this.style.display='none';document.getElementById('success-msg').style.display='block'})
+    .catch(()=>{this.style.display='none';document.getElementById('success-msg').style.display='block'});
+});
 
+function subscribeEmail(){
+  const email=document.getElementById('sub-email').value;
+  if(!email||!email.includes('@'))return;
+  const data=new FormData();
+  data.append('access_key','83ebab66-128e-428b-8131-ef1ec2a37bd7');
+  data.append('email',email);
+  data.append('subject','New Kọmply Newsletter Subscriber');
+  data.append('message','New subscriber: '+email);
+  fetch('https://api.web3forms.com/submit',{method:'POST',body:data});
+  document.getElementById('sub-form').style.display='none';
+  document.getElementById('sub-success').style.display='block';
+}
+</script>
 </body>
 </html>
