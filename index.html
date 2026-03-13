@@ -321,15 +321,6 @@
     @media(max-width:900px){.nav-links{display:none}.serve-grid,.ada-inner,.calc-panel.active,.how-panel.active{grid-template-columns:1fr}.feat-panel.active,.pricing-grid{grid-template-columns:1fr 1fr}.footer-top{grid-template-columns:1fr 1fr}}
     @media(max-width:560px){.feat-panel.active,.pricing-grid,.wl-row{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr}}
   </style>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9BS2HBX6HQ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-9BS2HBX6HQ');
-</script>
 </head>
 <body>
 
@@ -855,7 +846,7 @@
         <li class="included"><svg><use href="#ico-check"/></svg>White label option</li>
         <li class="included"><svg><use href="#ico-check"/></svg>Direct FIRS integration</li>
       </ul>
-      <a href="/cdn-cgi/l/email-protection#a5cdc0c9c9cae5cecac8d5c9dc8bc6cac88bcbc2" class="price-btn">
+      <a href="mailto:hello@komply.com.ng" class="price-btn">
         Contact Us
         <svg><use href="#ico-arrow-right"/></svg>
       </a>
@@ -1004,7 +995,7 @@
           <a href="https://linkedin.com/company/komply" class="social-btn" title="LinkedIn"><svg><use href="#ico-linkedin"/></svg></a>
           <a href="https://twitter.com/KomplyNG" class="social-btn" title="X / Twitter"><svg><use href="#ico-twitter"/></svg></a>
           <a href="https://instagram.com/komply.ng" class="social-btn" title="Instagram"><svg><use href="#ico-instagram"/></svg></a>
-          <a href="/cdn-cgi/l/email-protection#dfb7bab3b3b09fb4b0b2afb3a6f1bcb0b2f1b1b8" class="social-btn" title="Email"><svg><use href="#ico-mail"/></svg></a>
+          <a href="mailto:hello@komply.com.ng" class="social-btn" title="Email"><svg><use href="#ico-mail"/></svg></a>
         </div>
       </div>
       <div class="footer-col">
@@ -1051,14 +1042,14 @@
       <div class="footer-bottom-links">
         <a href="#">Privacy Policy</a>
         <a href="#">Terms of Service</a>
-        <a href="/cdn-cgi/l/email-protection#7e161b1212113e1511130e1207501d1113501019"><span class="__cf_email__" data-cfemail="bdd5d8d1d1d2fdd6d2d0cdd1c493ded2d093d3da">[email&#160;protected]</span></a>
+        <a href="mailto:hello@komply.com.ng">hello@komply.com.ng</a>
         <a href="tel:+2348148564434">+234 8148564434</a>
       </div>
     </div>
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 function switchCalc(btn,tab){document.querySelectorAll('.ctab').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.calc-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById('calc-'+tab).classList.add('active')}
 function switchFeat(btn,tab){document.querySelectorAll('.ftab').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.feat-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById('feat-'+tab).classList.add('active')}
 function switchHow(btn,tab){document.querySelectorAll('.htab').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.how-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById('how-'+tab).classList.add('active')}
@@ -1135,9 +1126,58 @@ document.getElementById('wl-form').addEventListener('submit',function(e){
 });
 
 function subscribeEmail(){
-  const email=document.getElementById('sub-email').value;
-  if(!email||!email.includes('@'))return;
-  const data=new FormData();
+  const emailEl = document.getElementById('sub-email');
+  const btnEl = document.getElementById('sub-btn');
+  const email = emailEl.value.trim();
+  if(!email || !email.includes('@')){
+    emailEl.style.border = '2px solid red';
+    setTimeout(()=>{ emailEl.style.border = ''; }, 2000);
+    return;
+  }
+  btnEl.textContent = 'Sending...';
+  btnEl.disabled = true;
+  const data = new FormData();
   data.append('access_key','83ebab66-128e-428b-8131-ef1ec2a37bd7');
-  data.append('email',email);
-  data.app
+  data.append('email', email);
+  data.append('subject','Kọmply Newsletter Signup');
+  fetch('https://api.web3forms.com/submit',{method:'POST',body:data})
+    .then(r=>r.json())
+    .then(()=>{
+      emailEl.value = '';
+      btnEl.textContent = '✓ Subscribed!';
+      btnEl.style.background = '#2ECC71';
+      setTimeout(()=>{
+        btnEl.textContent = 'Subscribe';
+        btnEl.style.background = '';
+        btnEl.disabled = false;
+      }, 3000);
+    })
+    .catch(()=>{
+      btnEl.textContent = 'Try Again';
+      btnEl.disabled = false;
+    });
+}
+
+// Mobile menu toggle
+document.addEventListener('DOMContentLoaded', function(){
+  const menuBtn = document.getElementById('menu-btn');
+  const navLinks = document.getElementById('nav-links');
+  if(menuBtn && navLinks){
+    menuBtn.addEventListener('click', function(){
+      navLinks.classList.toggle('open');
+    });
+  }
+});
+</script>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9BS2HBX6HQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9BS2HBX6HQ');
+</script>
+
+</body>
+</html>
