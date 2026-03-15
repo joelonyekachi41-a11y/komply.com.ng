@@ -86,7 +86,7 @@ nav {
 }
 .hero-inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 1fr 480px; gap: 64px; align-items: center; }
 .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(46,204,113,0.15); border: 1px solid rgba(46,204,113,0.3); border-radius: 100px; padding: 5px 14px; font-size: 12px; font-weight: 600; color: var(--gg); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 24px; }
-.hero-tag span { width: 6px; height: 6px; background: var(--gg); border-radius: 50%; animation: pulse 2s infinite; }
+.hero-tag-dot { width: 6px; height: 6px; background: var(--gg); border-radius: 50%; animation: pulse 2s infinite; display: inline-block; flex-shrink: 0; }
 @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
 .hero h1 { font-family: var(--serif); font-size: clamp(36px,5vw,56px); color: #fff; line-height: 1.12; margin-bottom: 20px; }
 .hero h1 em { color: var(--gg); font-style: normal; }
@@ -149,7 +149,7 @@ nav {
 .who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 .who-card { border-radius: 20px; overflow: hidden; border: 1.5px solid var(--border); }
 .who-card-head { background: var(--gd); padding: 32px; }
-.who-card-icon { width: 48px; height: 48px; background: rgba(46,204,113,0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 16px; }
+.who-card-icon { width: 48px; height: 48px; background: rgba(46,204,113,0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; color: var(--gg); }
 .who-card-head h3 { font-family: var(--serif); font-size: 22px; color: #fff; margin-bottom: 8px; }
 .who-card-head p { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.6; }
 .who-card-body { background: #fff; padding: 24px 32px; }
@@ -201,7 +201,7 @@ nav {
 .feat-panel.active { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
 .feat-card { background: #fff; border: 1.5px solid var(--border); border-radius: 16px; padding: 24px; position: relative; transition: border-color 0.2s, box-shadow 0.2s; }
 .feat-card:hover { border-color: var(--gm); box-shadow: 0 4px 20px rgba(26,140,78,0.1); }
-.feat-card-icon { width: 44px; height: 44px; background: var(--gl); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 14px; }
+.feat-card-icon { width: 44px; height: 44px; background: var(--gl); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; color: var(--gm); }
 .feat-card h4 { font-size: 15px; font-weight: 700; color: var(--gd); margin-bottom: 6px; }
 .feat-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
 .feat-badge { position: absolute; top: 16px; right: 16px; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 6px; }
@@ -213,7 +213,7 @@ nav {
 .amaka-grid { display: grid; grid-template-columns: 1fr 460px; gap: 64px; align-items: center; }
 .amaka-features { display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
 .amaka-feat { display: flex; align-items: flex-start; gap: 14px; }
-.amaka-feat-icon { width: 40px; height: 40px; background: rgba(46,204,113,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.amaka-feat-icon { width: 40px; height: 40px; background: rgba(46,204,113,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--gg); }
 .amaka-feat-text h4 { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 2px; }
 .amaka-feat-text p { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.5; }
 .chat-demo { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 20px; }
@@ -237,7 +237,15 @@ nav {
 .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 32px; }
 .price-card { background: #fff; border: 2px solid var(--border); border-radius: 20px; padding: 28px 24px; position: relative; transition: all 0.2s; }
 .price-card:hover { border-color: var(--gm); box-shadow: 0 8px 32px rgba(26,140,78,0.1); }
-.price-card.featured { border-color: var(--gm); box-shadow: 0 8px 40px rgba(26,140,78,0.15); }
+.price-card.featured { border-color: var(--gm); box-shadow: 0 12px 48px rgba(26,140,78,0.25); background: var(--gd); transform: translateY(-8px); }
+.price-card.featured .price-name { color: #fff; }
+.price-card.featured .price-target { color: rgba(255,255,255,0.6); }
+.price-card.featured .price-amount { color: var(--gg); }
+.price-card.featured .price-period { color: rgba(255,255,255,0.5); }
+.price-card.featured .price-features li { color: rgba(255,255,255,0.85); border-bottom-color: rgba(255,255,255,0.08); }
+.price-card.featured .price-features li.locked { color: rgba(255,255,255,0.25); }
+.price-card.featured .feat-check { color: var(--gg); }
+.price-card.featured .feat-x { color: rgba(255,255,255,0.2); }
 .price-popular { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--gm); color: #fff; font-size: 11px; font-weight: 700; padding: 4px 14px; border-radius: 100px; white-space: nowrap; }
 .price-name { font-size: 16px; font-weight: 700; color: var(--gd); margin-bottom: 2px; }
 .price-target { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
@@ -331,7 +339,7 @@ footer { background: var(--gd); padding: 56px 5% 32px; }
 .footer-compliance { border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08); padding: 20px 0; margin-bottom: 28px; }
 .footer-compliance-inner { display: flex; gap: 32px; flex-wrap: wrap; justify-content: center; }
 .footer-compliance-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.5); }
-.footer-compliance-icon { font-size: 16px; }
+.footer-compliance-icon { width: 16px; height: 16px; color: rgba(255,255,255,0.5); flex-shrink: 0; }
 .footer-bottom { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; }
 .footer-bottom-left p { font-size: 12px; color: rgba(255,255,255,0.35); }
 .footer-bottom-right { display: flex; gap: 20px; }
@@ -406,7 +414,7 @@ footer { background: var(--gd); padding: 56px 5% 32px; }
 <section class="hero">
   <div class="hero-inner">
     <div>
-      <div class="hero-tag"><span></span>2026 NRS Act Now In Effect</div>
+      <div class="hero-tag"><span class="hero-tag-dot"></span>2026 NRS Act Now In Effect</div>
       <h1>Stop Paying Fines.<br><em>Start Being</em><br>Fully Compliant.</h1>
       <p class="hero-sub">Kọmply automates PAYE, pension remittances, CAC filings and personal income tax returns for Nigerian businesses and individuals — so you never pay another avoidable fine.</p>
       <div class="hero-btns">
@@ -465,7 +473,7 @@ footer { background: var(--gd); padding: 56px 5% 32px; }
 
 <div class="alert-strip">
   <div class="alert-strip-inner">
-    <svg class="alert-strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-warn"/></svg>
+    <svg class="alert-strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
     <p><strong>2026 NRS Act:</strong> Businesses face <strong>₦100,000</strong> in month one + <strong>₦50,000 every month after</strong> for non-compliance. Individuals face <strong>₦25,000</strong> for missing the March 31 personal tax deadline.</p>
   </div>
 </div>
@@ -482,7 +490,7 @@ footer { background: var(--gd); padding: 56px 5% 32px; }
     <div class="who-grid">
       <div class="who-card">
         <div class="who-card-head">
-          <div class="who-card-icon">🏢</div>
+          <div class="who-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
           <h3>For Businesses</h3>
           <p>SMEs, startups and enterprises. Running a Nigerian business means 7 monthly compliance obligations. Miss one and face fines that compound every month.</p>
         </div>
@@ -500,7 +508,7 @@ footer { background: var(--gd); padding: 56px 5% 32px; }
       </div>
       <div class="who-card">
         <div class="who-card-head">
-          <div class="who-card-icon">👤</div>
+          <div class="who-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
           <h3>For Individuals</h3>
           <p>Employees, freelancers and self-employed. The 2026 NRS Act means every Nigerian adult earning income must file a personal tax return by March 31.</p>
         </div>
@@ -609,20 +617,20 @@ footer { background: var(--gd); padding: 56px 5% 32px; }
       <button class="ftab" id="ftab-individual" onclick="switchFeatTab('individual')">For Individuals</button>
     </div>
     <div class="feat-panel active" id="feat-business">
-      <div class="feat-card"><div class="feat-card-icon">💰</div><h4>Smart Payroll Engine</h4><p>Auto-calculates PAYE, pension, NHF and NSITF for every staff member using 2026 Nigerian tax bands.</p><span class="feat-badge all">All Plans</span></div>
-      <div class="feat-card"><div class="feat-card-icon">📅</div><h4>Compliance Calendar</h4><p>All 7 Nigerian compliance deadlines in one colour-coded calendar. Never miss a filing date again.</p><span class="feat-badge all">All Plans</span></div>
-      <div class="feat-card"><div class="feat-card-icon">📊</div><h4>Compliance Health Score</h4><p>A live 0–100 score showing exactly where your business stands — like a credit score for compliance.</p><span class="feat-badge growth">Growth+</span></div>
-      <div class="feat-card"><div class="feat-card-icon">📄</div><h4>Payslip Generator</h4><p>Professional PDF payslips for every employee in one click. Download individually or as a ZIP.</p><span class="feat-badge growth">Growth+</span></div>
-      <div class="feat-card"><div class="feat-card-icon">🏆</div><h4>Compliance Certificate</h4><p>Download a monthly compliance certificate when all obligations are filed. Show banks and auditors.</p><span class="feat-badge growth">Growth+</span></div>
-      <div class="feat-card"><div class="feat-card-icon">💬</div><h4>Amaka AI Advisor</h4><p>Ask anything about Nigerian compliance in English or Pidgin. Available 24/7 inside your dashboard.</p><span class="feat-badge all">All Plans</span></div>
+      <div class="feat-card"><div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><h4>Smart Payroll Engine</h4><p>Auto-calculates PAYE, pension, NHF and NSITF for every staff member using 2026 Nigerian tax bands.</p><span class="feat-badge all">All Plans</span></div>
+      <div class="feat-card"><div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><h4>Compliance Calendar</h4><p>All 7 Nigerian compliance deadlines in one colour-coded calendar. Never miss a filing date again.</p><span class="feat-badge all">All Plans</span></div>
+      <div class="feat-card"><div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><h4>Compliance Health Score</h4><p>A live 0–100 score showing exactly where your business stands — like a credit score for compliance.</p><span class="feat-badge growth">Growth+</span></div>
+      <div class="feat-card"><div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><h4>Payslip Generator</h4><p>Professional PDF payslips for every employee in one click. Download individually or as a ZIP.</p><span class="feat-badge growth">Growth+</span></div>
+      <div class="feat-card"><div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div><h4>Compliance Certificate</h4><p>Download a monthly compliance certificate when all obligations are filed. Show banks and auditors.</p><span class="feat-badge growth">Growth+</span></div>
+      <div class="feat-card"><div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><h4>Amaka AI Advisor</h4><p>Ask anything about Nigerian compliance in English or Pidgin. Available 24/7 inside your dashboard.</p><span class="feat-badge all">All Plans</span></div>
     </div>
     <div class="feat-panel" id="feat-individual">
-      <div class="feat-card"><div class="feat-card-icon">📋</div><h4>Personal Tax Return Filing</h4><p>Step-by-step guided personal income tax preparation and submission before March 31.</p><span class="feat-badge all">All Plans</span></div>
-      <div class="feat-card"><div class="feat-card-icon">⏳</div><h4>March 31 Countdown</h4><p>Never miss Nigeria's individual tax deadline. Reminders start 30 days before the due date.</p><span class="feat-badge all">All Plans</span></div>
-      <div class="feat-card"><div class="feat-card-icon">🧾</div><h4>Tax Clearance Certificate</h4><p>Download your TCC once filed. Required for bank loans, property, government contracts and travel.</p><span class="feat-badge all">All Plans</span></div>
-      <div class="feat-card"><div class="feat-card-icon">📈</div><h4>Multiple Income Calculator</h4><p>Combine salary, freelance, rental and investment income to calculate your exact tax liability.</p><span class="feat-badge growth">Premium</span></div>
-      <div class="feat-card"><div class="feat-card-icon">💡</div><h4>Fine Savings Tracker</h4><p>See exactly how much Kọmply has saved you in potential fines — updated every month.</p><span class="feat-badge all">All Plans</span></div>
-      <div class="feat-card"><div class="feat-card-icon">💬</div><h4>Amaka AI Advisor</h4><p>Your personal Nigerian tax advisor. English or Pidgin. Answers PAYE, TCC, nil return questions instantly.</p><span class="feat-badge all">All Plans</span></div>
+      <div class="feat-card"><div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 12 18 15 15"/><line x1="12" y1="12" x2="12" y2="18"/></svg></div><h4>Personal Tax Return Filing</h4><p>Step-by-step guided personal income tax preparation and submission before March 31.</p><span class="feat-badge all">All Plans</span></div>
+      <div class="feat-card"><div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h4>March 31 Countdown</h4><p>Never miss Nigeria's individual tax deadline. Reminders start 30 days before the due date.</p><span class="feat-badge all">All Plans</span></div>
+      <div class="feat-card"><div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><h4>Tax Clearance Certificate</h4><p>Download your TCC once filed. Required for bank loans, property, government contracts and travel.</p><span class="feat-badge all">All Plans</span></div>
+      <div class="feat-card"><div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><h4>Multiple Income Calculator</h4><p>Combine salary, freelance, rental and investment income to calculate your exact tax liability.</p><span class="feat-badge growth">Premium</span></div>
+      <div class="feat-card"><div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><h4>Fine Savings Tracker</h4><p>See exactly how much Kọmply has saved you in potential fines — updated every month.</p><span class="feat-badge all">All Plans</span></div>
+      <div class="feat-card"><div class="feat-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><h4>Amaka AI Advisor</h4><p>Your personal Nigerian tax advisor. English or Pidgin. Answers PAYE, TCC, nil return questions instantly.</p><span class="feat-badge all">All Plans</span></div>
     </div>
   </div>
 </section>
@@ -637,9 +645,9 @@ footer { background: var(--gd); padding: 56px 5% 32px; }
         <h2 class="sec-title" style="color:#fff">Your Personal Nigerian<br>Tax Advisor — 24/7</h2>
         <p class="sec-sub">Amaka is Kọmply's AI compliance advisor. She knows Nigerian tax law inside out and speaks your language — English or Pidgin.</p>
         <div class="amaka-features">
-          <div class="amaka-feat"><div class="amaka-feat-icon">🇳🇬</div><div class="amaka-feat-text"><h4>English and Pidgin</h4><p>Responds in the language you write in. No jargon.</p></div></div>
-          <div class="amaka-feat"><div class="amaka-feat-icon">⚡</div><div class="amaka-feat-text"><h4>Instant Answers</h4><p>PAYE, pension, CAC, NHF, VAT — she knows all of it.</p></div></div>
-          <div class="amaka-feat"><div class="amaka-feat-icon">🔒</div><div class="amaka-feat-text"><h4>Your Data is Private</h4><p>Conversations are never shared or sold to third parties.</p></div></div>
+          <div class="amaka-feat"><div class="amaka-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><div class="amaka-feat-text"><h4>English and Pidgin</h4><p>Responds in the language you write in. No jargon.</p></div></div>
+          <div class="amaka-feat"><div class="amaka-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div class="amaka-feat-text"><h4>Instant Answers</h4><p>PAYE, pension, CAC, NHF, VAT — she knows all of it.</p></div></div>
+          <div class="amaka-feat"><div class="amaka-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><div class="amaka-feat-text"><h4>Your Data is Private</h4><p>Conversations are never shared or sold to third parties.</p></div></div>
         </div>
       </div>
       <div class="chat-demo">
@@ -814,8 +822,8 @@ footer { background: var(--gd); padding: 56px 5% 32px; }
     <p class="footer-tagline">Stop Paying Fines.<br>Start Being Fully Compliant.</p>
     <p class="footer-company">A product of<br><strong>Redberry Technology Africa Limited</strong><br>Lagos, Nigeria</p>
     <div class="footer-socials">
-      <a href="https://twitter.com/KomplyNG" target="_blank" rel="noopener" class="social-link">𝕏</a>
-      <a href="https://linkedin.com/company/komply" target="_blank" rel="noopener" class="social-link">in</a>
+      <a href="https://twitter.com/KomplyNG" target="_blank" rel="noopener" class="social-link" title="Follow on X"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></a>
+      <a href="https://linkedin.com/company/komply" target="_blank" rel="noopener" class="social-link" title="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
       <a href="/cdn-cgi/l/email-protection#1d75787171725d7672706d7164337e727033737a" class="social-link">✉</a>
     </div>
   </div>
@@ -858,19 +866,19 @@ footer { background: var(--gd); padding: 56px 5% 32px; }
 <div class="footer-compliance">
   <div class="footer-compliance-inner">
     <div class="footer-compliance-item">
-      <span class="footer-compliance-icon">🔒</span>
+      <svg class="footer-compliance-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
       <span>256-bit SSL Encryption</span>
     </div>
     <div class="footer-compliance-item">
-      <span class="footer-compliance-icon">🇳🇬</span>
+      <svg class="footer-compliance-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
       <span>NDPR Compliant</span>
     </div>
     <div class="footer-compliance-item">
-      <span class="footer-compliance-icon">✅</span>
+      <svg class="footer-compliance-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
       <span>2026 NRS Act Aligned</span>
     </div>
     <div class="footer-compliance-item">
-      <span class="footer-compliance-icon">🏦</span>
+      <svg class="footer-compliance-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
       <span>Paystack Secured Payments</span>
     </div>
   </div>
@@ -879,8 +887,8 @@ footer { background: var(--gd); padding: 56px 5% 32px; }
 <!-- FOOTER BOTTOM -->
 <div class="footer-bottom">
   <div class="footer-bottom-left">
-    <p>&copy; 2026 Kọmply &nbsp;&middot;&nbsp; Redberry Technology Africa Limited &nbsp;&middot;&nbsp; RC: Pending Registration</p>
-    <p style="margin-top:4px">Built with ❤️ for Nigerian businesses and individuals &nbsp;🇳🇬</p>
+    <p>&copy; 2026 Kọmply &nbsp;&middot;&nbsp; Redberry Technology Africa Limited &nbsp;&middot;&nbsp; Lagos, Nigeria</p>
+    <p style="margin-top:4px">Built for Nigerian businesses and individuals across Nigeria.</p>
   </div>
   <div class="footer-bottom-right">
     <a href="/cdn-cgi/l/email-protection#523a373e3e3d12393d3f223e2b7c313d3f7c3c35">Privacy Policy</a>
